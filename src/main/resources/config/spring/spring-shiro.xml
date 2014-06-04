@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<!-- <bean id="shiroDbRealm" class="" /> -->
+	<bean id="shiroDbRealm" class="org.apache.shiro.realm.text.IniRealm">
+	   <constructor-arg name="resourcePath" value="classpath:config/shiro/shiro.ini" />
+	</bean>
+	
+	<!-- 权限管理器 -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <!-- 数据库认证的实现 org.springrain.frame.shiro.ShiroDbRealm -->
+        <property name="realm" ref="shiroDbRealm" />
+        <!-- 缓存管理器 -->
+        <property name="cacheManager" ref="shiroCacheManager" />
+        <!-- session 管理器 -->
+        <property name="sessionManager" ref="sessionManager" />
+        <!-- cookie管理器 -->
+        <property name="rememberMeManager" ref="rememberMeManager"/>
+    </bean>
+    <!-- session管理器 -->
+    <bean id="sessionManager"
+        class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+        <!-- 超时时间 -->
+        <property name="globalSessionTimeout" value="1800000" />
+        <!-- session存储的实现 -->
+        <property name="sessionDAO" ref="shiroSessionDao" />
+        <!-- sessionIdCookie的实现,用于重写覆盖容器默认的JSESSIONID -->
+        <property name="sessionIdCookie" ref="sharesession" />
+        <!-- 定时检查失效的session -->
+        <property name="sessionValidationSchedulerEnabled" value="true" />
+    </bean>
+
+    <!-- sessionIdCookie的实现,用于重写覆盖容器默认的JSESSIONID -->
+    <bean id="sharesession" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <!-- cookie的name,对应的默认是 JSESSIONID -->
+        <constructor-arg name="name" value="SHAREJSESSIONID" />
+        <!-- jsessionId的path为 / 用于多个系统共享jsessionId -->
+        <property name="path" value="/" />
+    </bean>
+    <!-- session存储的实现 -->
+    <bean id="shiroSessionDao"
+        class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO" />
+
+    <!-- 单机session -->
+    <bean id="shiroCacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" />
+    
+    <!-- manager -->
+    <!-- Remembered vs Authenticated http://www.ituring.com.cn/article/287 -->
+    <bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+        <!-- rememberme cookie加密的密钥 建议每个项目都不一样 默认AES算法 密钥长度（128 256 512 位）-->
+        <property name="cipherKey"
+                  value="#{T(org.apache.shiro.codec.Base64).decode('4AvVhmFLUs0KTA3Kprsdag==')}"/>
+        <property name="cookie" ref="rememberMeCookie"/>
+    </bean>
+    <bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <constructor-arg value="rememberMe"/>
+        <property name="domain" value="localhost"/>
+        <property name="path" value="/"/>
+        <property name="httpOnly" value="true"/>
+        <property name="maxAge" value="1"/>
+    </bean>
+    
+    <!--提取系统用户（User） 验证用户是否合法的过滤器（如是否删除了 是否锁定了） -->
+    <bean id="sysUserFilter" class="org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter">
+    </bean>
+	
+    <!-- shiro的主过滤器,beanId 和web.xml中配置的filter name需要保持一致 -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <!-- 安全管理器 -->
+        <property name="securityManager" ref="securityManager" />
+        <!-- 默认的登陆访问url -->
+        <property name="loginUrl" value="/shiro/loginon" />
+        <!-- 登陆成功后跳转的url -->
+        <property name="successUrl" value="/shiro/index" />
+        <!-- 没有权限跳转的url -->
+        <property name="unauthorizedUrl" value="/unauth" />
+        <!-- 访问地址的过滤规则,从上至下的优先级,如果有匹配的规则,就会返回,不会再进行匹配 -->
+        <property name="filterChainDefinitions">
+            <value>
+                /js/** = anon
+                /css/** = anon
+                /images/** = anon
+                /static/** = anon
+                /tld/** = anon
+                /favicon.ico = anon
+                /unauth = anon
+                /getCaptcha=anon
+                /login = anon
+                /logout = logout
+                /index = user
+                /**/ajax/** = user
+                /** = user
+            </value>
+        </property>
+        <!-- 声明自定义的过滤器 -->
+        <property name="filters">
+            <map>
+                <entry key="user" value-ref="sysUserFilter"></entry>
+            </map>
+        </property>
+    </bean>
+    <!-- 起效权限注解,这个很少在web项目中用到,一般是控制url的访问,不是在controller中声明权限注解 -->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />	
+</beans>
+
