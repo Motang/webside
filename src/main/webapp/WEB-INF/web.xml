@@ -77,7 +77,6 @@
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>classpath:config/spring-mvc.xml</param-value>
-			<description>servlet config</description>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
@@ -100,6 +99,10 @@
 	<error-page>
 		<error-code>500</error-code>
 		<location>/WEB-INF/jsp/error/error_page_500.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>401</error-code>
+		<location>/WEB-INF/jsp/error/error_page_401.html</location>
 	</error-page>
 	<error-page>
 		<error-code>404</error-code>

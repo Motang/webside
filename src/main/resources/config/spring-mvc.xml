@@ -48,13 +48,14 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
     
-     <mvc:view-controller path="/" view-name="redirect:/example.form"/>
+     <mvc:view-controller path="/" view-name="redirect:/index"/>
     <!-- 当在web.xml 中   DispatcherServlet使用 <url-pattern>/</url-pattern> 映射时，能映射静态资源 -->
     <mvc:default-servlet-handler/>
 
     <!-- 静态资源映射 -->
     <!-- <mvc:resources mapping="/static/img/**" location="http://localhost:8082/docs/images/"/> -->
-    <mvc:resources mapping="/static/img/**" location="/WEB-INF/static/img/"/>
+    <mvc:resources mapping="/static/**" location="/WEB-INF/static/"/>
+    <mvc:resources mapping="/html/**" location="/WEB-INF/html/"/>
     
      <!-- 内容协商管理器  -->
     <!--1、首先检查路径扩展名（如my.pdf）；2、其次检查Parameter（如my?format=pdf）；3、检查Accept Header-->
