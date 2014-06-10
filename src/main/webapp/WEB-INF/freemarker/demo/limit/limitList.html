@@ -1,0 +1,71 @@
+
+<@h.easyui />
+<script type="text/javascript" src="${ctx}/js/plugins/jquery.checkbox.js"></script>
+<script type="text/javascript" src="${ctx}/js/demo/menu/menu.js"></script>
+</head>
+
+<script type="text/javascript">
+<!--
+jQuery(document).ready(function(){
+     //初始化 排序图标
+    initSortTable("listDataTable","searchForm");
+	//添加颜色改变
+	mouseTrColor("listDataTable");
+	
+});
+//-->
+</script>
+
+<body>
+<!-- 操作菜单 -->
+	<div class="head">
+		<div class="path">权限分配 &gt; 权限分配列表</div>
+	</div>
+	<div class="contents">
+<!-- 查询 -->
+<!-- 数据列表 -->
+		<dl class="box_1">
+			<dt>
+				<div>数据</div>
+			</dt>
+			<dd>
+			
+			
+			<!--start_export-->
+				<table  id="listDataTable" border="1" class="tb_2">
+			<!--end_no_export-->
+			<!--first_start_export-->
+					<tr id="table_first_tr"  bgcolor="#F1F1F1" >
+					<!--first_start_no_export-->
+						<th width="100px;">操作</th>
+					<!--first_end_no_export-->
+						<th id="th_role" >角色</th>
+					</tr>
+				<!--first_end_export-->
+				<!--start_export-->
+				   <#if datas??&&((datas?size)>0)>
+					<#list datas as data>
+						<tr>
+				<!--start_no_export-->
+						<td style="text-align:center;">
+								<a href="javascript:f_newTab('${data.roleId}_update','${data.roleId}_update','${data.roleId}_修改菜单','${ctx}/limit/update/pre?id=${data.roleId}');">修改</a>
+								 
+						</td>
+				<!--end_no_export-->
+							<td >
+								${(data.roleName)!''}
+							</td>
+						</tr>
+					</#list>
+					 </#if>
+				</table>
+			 <!--end_export-->
+			</dd>
+<#if page??>		
+<!-- 分页 -->
+	  <@h.pagetoolbar page=page formName='searchForm'/>
+</#if>
+		</dl>
+	</div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+
+<@h.easyui />
+
+
+<input type="hidden" name="commTabId" id="commTabId" value="${commTabId!''}"  />
+<!--input  hidden  Start-->
+	<input type="hidden" id="id" name="id" value="${(auditlog.id)!''}"/>	
+<!--input  hidden  End-->
+	<table class="tb_6">	
+		<!-- Start-->
+			<tr>
+				<th>操作类型:</th>	
+					<!-- 字符型 -->
+					<td>
+					${(auditlog.operationType)!''} 
+					</td>	
+			</tr>
+			<tr>
+				<th>操作人姓名:</th>	
+					<!-- 字符型 -->
+					<td>
+					${(auditlog.operatorName)!''} 
+					</td>	
+			</tr>
+			<tr>
+				<th>旧值:</th>	
+					<!-- 字符型 -->
+					<td>
+					${(auditlog.preValue)!''} 
+					</td>	
+			</tr>
+			<tr>
+				<th>新值:</th>	
+					<!-- 字符型 -->
+					<td>
+					${(auditlog.curValue)!''} 
+					</td>	
+			</tr>
+			<tr>
+				<th>操作时间:</th>	
+					<!--日期型-->
+					<td>
+					  ${((auditlog.operationTime)?string('yyyy-MM-dd'))!'' }
+					</td>
+		
+			</tr>
+			<tr>
+				<th>操作类:</th>	
+					<!-- 字符型 -->
+					<td>
+					${(auditlog.operationClass)!''} 
+					</td>	
+			</tr>
+			<tr>
+				<th>记录ID:</th>	
+					<!-- 字符型 -->
+					<td>
+					${(auditlog.operationClassID)!''} 
+					</td>	
+			</tr>
+	</table>

@@ -1,0 +1,11 @@
+.tableForm {
+	
+}
+
+.tableForm th {
+	text-align: right;
+}
+
+.tableForm td input {
+	width: 150px;
+}

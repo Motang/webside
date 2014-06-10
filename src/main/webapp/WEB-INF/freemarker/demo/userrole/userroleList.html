@@ -1,0 +1,121 @@
+
+<@h.easyui />
+<script type="text/javascript" src="${ctx}/js/plugins/jquery.checkbox.js"></script>
+<script type="text/javascript" src="${ctx}/js/demo/userrole/userrole.js"></script>
+</head>
+
+<script type="text/javascript">
+<!--
+jQuery(document).ready(function(){
+     //初始化 排序图标
+    initSortTable("listDataTable","searchForm");
+	//添加颜色改变
+	mouseTrColor("listDataTable");
+	
+});
+//-->
+</script>
+
+<body>
+<!-- 操作菜单 -->
+	<div class="head">
+		<div class="path">UserRole &gt; UserRole</div>
+	</div>
+	<div class="contents">
+<!-- 查询 -->
+<form name="searchForm" id="searchForm" method="post" action="${ctx}/userrole/list" >
+<input type="hidden" name="pageIndex" id="pageIndex" value="${(page.pageIndex)!'1'}" />
+<input type="hidden" name="commTabId" id="commTabId" value="${commTabId!''}"  />
+<input type="hidden" name="sort" id="page_sort" value="${(page.sort)!'desc'}"  />
+<input type="hidden" name="order" id="page_order" value="${(page.order)!'id'}"  />
+		<table class="tb_2">
+			<tr>
+			
+			
+			
+			
+			
+	         <td>用户编号:<input type="text" id="userId" name="userId"  class="inp_2" /></td>
+			 
+			
+			
+			
+	         <td>角色编号:<input type="text" id="roleId" name="roleId"  class="inp_2" /></td>
+			 
+			
+			
+			
+				
+			
+				<td>
+					<input type="button" onclick="submitForm('searchForm');"  value="搜 索" class="btn_search"  />  
+				
+				</td>
+			</tr>
+		</table>
+		</form>
+		
+<!-- 数据列表 -->
+		<dl class="box_1">
+			<dt>
+				<div>数据</div>
+				<a class="a_1" href="javascript:export_excel('searchForm');">导出</a><div class="img_2" ></div>
+				<a class="a_3" href="javascript:f_newTab('add_userrole','add_userrole','add_userrole','${ctx}/userrole/update/pre');">添加</a><div class="img_2" ></div>
+				<a class="a_0" href="javascript:delMulti();">删除选中</a><div class="img_2"></div>
+			</dt>
+			<dd>
+			
+			
+			<!--start_export-->
+				<table  id="listDataTable" border="1" class="tb_2">
+			<!--end_no_export-->
+			<!--first_start_export-->
+					<tr id="table_first_tr"  bgcolor="#F1F1F1" >
+					<!--first_start_no_export-->
+						<th><input type="checkbox" name="check_all" id="check_all"/></th>
+						<th width="100px;">操作</th>
+					<!--first_end_no_export-->
+						<th id="th_userId" >用户编号</th>
+						<th id="th_roleId" >角色编号</th>
+						
+					</tr>
+				<!--first_end_export-->
+				
+				<!--start_export-->
+				   <#if datas??&&((datas?size)>0)>
+					<#list datas as data>
+						<tr>
+				<!--start_no_export-->
+						<#if (datas?size > 0)>
+							<td align="center">
+								<input type="checkbox" name="check_li" value="${data.id}" />
+							</td>
+						</#if>
+						
+						<td style="text-align:center;">
+								<a href="javascript:f_newTab('${data.id}_update','${data.id}_update','${data.id}_update','${ctx}/userrole/update/pre?id=${data.id}');">修改</a>
+								  /  <a href="javascript:delUserRole('${data.id}');">删除</a>/<a href="javascript:f_newTab('${data.id}_look','${data.id}_look','${data.id}_look','${ctx}/userrole/look?id=${data.id}');">查看</a>
+						</td>
+				<!--end_no_export-->
+						
+							<td >
+								${(data.userId)!''}
+							</td>
+							<td >
+								${(data.roleId)!''}
+							</td>
+							
+						</tr>
+					</#list>
+					 </#if>
+				</table>
+			 <!--end_export-->
+			</dd>
+<#if page??>		
+<!-- 分页 -->
+	  <@h.pagetoolbar page=page formName='searchForm'/>
+</#if>
+		</dl>
+	</div>
+</body>
+</html>

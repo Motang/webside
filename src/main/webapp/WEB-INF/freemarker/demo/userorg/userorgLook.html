@@ -1,0 +1,32 @@
+
+<@h.easyui />
+
+
+<input type="hidden" name="commTabId" id="commTabId" value="${commTabId!''}"  />
+<!--input  hidden  Start-->
+	<input type="hidden" id="id" name="id" value="${(userOrg.id)!''}"/>	
+<!--input  hidden  End-->
+	<table class="tb_6">	
+		<!-- Start-->
+			<tr>
+				<th><span >*</span>用户编号:</th>	
+					<!-- 字符型 -->
+					<td>
+					${(userOrg.userId)!''} 
+					</td>	
+			</tr>
+			<tr>
+				<th><span >*</span>机构编号:</th>	
+					<!-- 字符型 -->
+					<td>
+					${(userOrg.orgId)!''} 
+					</td>	
+			</tr>
+			<tr>
+				<th><span >*</span>0.不是1.是:</th>	
+					<!-- 字符型 -->
+					<td>
+					${(userOrg.manager)!''} 
+					</td>	
+			</tr>
+	</table>

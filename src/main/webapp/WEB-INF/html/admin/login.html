@@ -1,9 +1,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>main Page</title>
+<title>Login Page</title>
 </head>
 <body>
-Successfully.....
+<form action="../../admin/adminLogin" method="POST">
+    <input type="hidden" id="rememberMe" name="rememberMe" value="true" />
+    User Name: <INPUT id="username" name="username" /><br>
+    Passwrod : <INPUT id="password" name="password" type="password" /><br>
+    <INPUT id="btnLogin" type="submit" value="登 录 " name=btnLogin>&nbsp;
+    <INPUT id="reset" type="reset" value="重 置" name="reset">
+</form>
 </body>
 </html>

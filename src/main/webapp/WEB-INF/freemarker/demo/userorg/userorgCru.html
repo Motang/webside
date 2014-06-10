@@ -1,0 +1,46 @@
+
+<@h.easyui />
+<script type="text/javascript" src="${ctx}/js/demo/userorg/userorgCru.js"></script>
+
+
+
+<script type="text/javascript">
+<!--
+jQuery(document).ready(function(){
+
+});
+//-->
+</script>
+
+
+<form id="updateForm" name="updateForm"  method="post" action="${ctx}/userorg/update" >
+<input type="hidden" name="commTabId" id="commTabId" value="${commTabId!''}"  />
+<!--input  hidden  Start-->
+	<input type="hidden" id="id" name="id" value="${(userOrg.id)!''}"/>	
+<!--input  hidden  End-->
+	<table class="tb_6">	
+		<!-- Start-->
+			<tr>
+				<th><span >*</span>用户编号:</th>	
+					<!-- 字符型 -->
+					<td>
+					<input type="text" id="userId" name="userId" value="${(userOrg.userId)!''}" maxlength="40"  class="easyui-validatebox" data-options="required:true,validType:['length[1,40]']"  />
+					</td>	
+			</tr>
+			<tr>
+				<th><span >*</span>机构编号:</th>	
+					<!-- 字符型 -->
+					<td>
+					<input type="text" id="orgId" name="orgId" value="${(userOrg.orgId)!''}" maxlength="40"  class="easyui-validatebox" data-options="required:true,validType:['length[1,40]']"  />
+					</td>	
+			</tr>
+			<tr>
+				<th><span >*</span>0.不是1.是:</th>	
+					<!-- 字符型 -->
+					<td>
+					<input type="text" id="manager" name="manager" value="${(userOrg.manager)!''}" maxlength="10"  class="easyui-validatebox" data-options="required:true,validType:['length[1,10]']"  />
+					</td>	
+			</tr>
+	</table>
+	<input type="button" onclick="submitUpdateForm();" class="btn_7"/>
+</form>

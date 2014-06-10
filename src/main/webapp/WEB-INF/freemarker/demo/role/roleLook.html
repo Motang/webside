@@ -1,0 +1,46 @@
+
+<@h.easyui />
+
+
+<input type="hidden" name="commTabId" id="commTabId" value="${commTabId!''}"  />
+<!--input  hidden  Start-->
+	<input type="hidden" id="id" name="id" value="${(role.id)!''}"/>	
+<!--input  hidden  End-->
+	<table class="tb_6">	
+		<!-- Start-->
+			<tr>
+				<th>角色名称:</th>	
+					<!-- 字符型 -->
+					<td>
+					${(role.name)!''} 
+					</td>	
+			</tr>
+			<tr>
+				<th>权限编码:</th>	
+					<!-- 字符型 -->
+					<td>
+					${(role.code)!''} 
+					</td>	
+			</tr>
+			<tr>
+				<th>所属部门:</th>	
+					<!-- 字符型 -->
+					<td>
+					${(role.pid)!''} 
+					</td>	
+			</tr>
+			<tr>
+				<th>备注:</th>	
+					<!-- 字符型 -->
+					<td>
+					${(role.remark)!''} 
+					</td>	
+			</tr>
+			<tr>
+				<th>状态,是否有效(0:否1:是):</th>	
+					<!-- 字符型 -->
+					<td>
+					${(role.state)!''} 
+					</td>	
+			</tr>
+	</table>

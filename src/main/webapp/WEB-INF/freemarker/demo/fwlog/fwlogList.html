@@ -1,0 +1,195 @@
+
+<@h.easyui />
+<script type="text/javascript" src="${ctx}/js/plugins/jquery.checkbox.js"></script>
+<script type="text/javascript" src="${ctx}/js/dhx/fwlog/fwlog.js"></script>
+		<script type="text/javascript" src="${ctx}/js/my97/WdatePicker.js"></script>
+</head>
+
+<script type="text/javascript">
+<!--
+jQuery(document).ready(function(){
+     //初始化 排序图标
+    initSortTable("listDataTable","searchForm");
+	//添加颜色改变
+	mouseTrColor("listDataTable");
+	
+});
+//-->
+</script>
+
+<body>
+<!-- 操作菜单 -->
+	<div class="head">
+		<div class="path">Fwlog &gt; Fwlog</div>
+	</div>
+	<div class="contents">
+<!-- 查询 -->
+<form name="searchForm" id="searchForm" method="post" action="${ctx}/fwlog/list" >
+<input type="hidden" name="pageIndex" id="pageIndex" value="${(page.pageIndex)!'1'}" />
+<input type="hidden" name="commTabId" id="commTabId" value="${commTabId!''}"  />
+<input type="hidden" name="sort" id="page_sort" value="${(page.sort)!'desc'}"  />
+<input type="hidden" name="order" id="page_order" value="${(page.order)!'id'}"  />
+		<table class="tb_2">
+			<tr>
+			
+			
+			
+			
+			
+			  <td>访问时间:<input type="text" id="startDate" name="startDate"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="readonly" value="${((fwlog.startDate)?string('yyyy-MM-dd'))!'' }"   class="inp_2" /></td>
+			 
+			
+			
+			
+	         <td>访问时间(毫秒):<input type="text" id="strDate" name="strDate"  class="inp_2" /></td>
+			 
+			
+			
+			
+	         <td>Tomcat:<input type="text" id="tomcat" name="tomcat"  class="inp_2" /></td>
+			 
+			
+			
+			
+	         <td>登陆账号:<input type="text" id="userCode" name="userCode"  class="inp_2" /></td>
+			 
+			
+			
+			
+	         <td>姓名:<input type="text" id="userName" name="userName"  class="inp_2" /></td>
+			 
+			
+			
+			
+	         <td>sessionId:<input type="text" id="sessionId" name="sessionId"  class="inp_2" /></td>
+			 
+			
+			
+			
+	         <td>IP:<input type="text" id="ip" name="ip"  class="inp_2" /></td>
+			 
+			
+			
+			
+	         <td>访问菜单:<input type="text" id="fwUrl" name="fwUrl"  class="inp_2" /></td>
+			 
+			
+			
+			
+	         <td>菜单名称:<input type="text" id="menuName" name="menuName"  class="inp_2" /></td>
+			 
+			
+			
+			
+	         <td>是否有权限访问:<input type="text" id="isqx" name="isqx"  class="inp_2" /></td>
+			 
+			
+			
+			
+				
+			
+				<td>
+					<input type="button" onclick="submitForm('searchForm');"  value="搜 索" class="btn_search"  />  
+				
+				</td>
+			</tr>
+		</table>
+		</form>
+		
+<!-- 数据列表 -->
+		<dl class="box_1">
+			<dt>
+				<div>数据</div>
+				<a class="a_1" href="javascript:export_excel('searchForm');">导出</a><div class="img_2" ></div>
+				<a class="a_3" href="javascript:f_newTab('add_fwlog','add_fwlog','add_fwlog','${ctx}/fwlog/update/pre');">添加</a><div class="img_2" ></div>
+				<a class="a_0" href="javascript:delMulti();">删除选中</a><div class="img_2"></div>
+			</dt>
+			<dd>
+			
+			
+			<!--start_export-->
+				<table  id="listDataTable" border="1" class="tb_2">
+			<!--end_no_export-->
+			<!--first_start_export-->
+					<tr id="table_first_tr"  bgcolor="#F1F1F1" >
+					<!--first_start_no_export-->
+						<th><input type="checkbox" name="check_all" id="check_all"/></th>
+						<th width="100px;">操作</th>
+					<!--first_end_no_export-->
+						<th id="th_startDate" >访问时间</th>
+						<th id="th_strDate" >访问时间(毫秒)</th>
+						<th id="th_tomcat" >Tomcat</th>
+						<th id="th_userCode" >登陆账号</th>
+						<th id="th_userName" >姓名</th>
+						<th id="th_sessionId" >sessionId</th>
+						<th id="th_ip" >IP</th>
+						<th id="th_fwUrl" >访问菜单</th>
+						<th id="th_menuName" >菜单名称</th>
+						<th id="th_isqx" >是否有权限访问</th>
+						
+					</tr>
+				<!--first_end_export-->
+				
+				<!--start_export-->
+				   <#if datas??&&((datas?size)>0)>
+					<#list datas as data>
+						<tr>
+				<!--start_no_export-->
+						<#if (datas?size > 0)>
+							<td align="center">
+								<input type="checkbox" name="check_li" value="${data.id}" />
+							</td>
+						</#if>
+						
+						<td style="text-align:center;">
+								<a href="javascript:f_newTab('${data.id}_update','${data.id}_update','${data.id}_update','${ctx}/fwlog/update/pre?id=${data.id}');">修改</a>
+								  /  <a href="javascript:delFwlog('${data.id}');">删除</a>/<a href="javascript:f_newTab('${data.id}_look','${data.id}_look','${data.id}_look','${ctx}/fwlog/look?id=${data.id}');">查看</a>
+						</td>
+				<!--end_no_export-->
+						
+							<td >
+								<!--日期型-->
+							${((data.startDate)?string('yyyy-MM-dd'))!''}
+							</td>
+							<td >
+								${(data.strDate)!''}
+							</td>
+							<td >
+								${(data.tomcat)!''}
+							</td>
+							<td >
+								${(data.userCode)!''}
+							</td>
+							<td >
+								${(data.userName)!''}
+							</td>
+							<td >
+								${(data.sessionId)!''}
+							</td>
+							<td >
+								${(data.ip)!''}
+							</td>
+							<td >
+								${(data.fwUrl)!''}
+							</td>
+							<td >
+								${(data.menuName)!''}
+							</td>
+							<td >
+								${(data.isqx)!''}
+							</td>
+							
+						</tr>
+					</#list>
+					 </#if>
+				</table>
+			 <!--end_export-->
+			</dd>
+<#if page??>		
+<!-- 分页 -->
+	  <@h.pagetoolbar page=page formName='searchForm'/>
+</#if>
+		</dl>
+	</div>
+</body>
+</html>

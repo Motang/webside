@@ -1,0 +1,167 @@
+<html>
+<head>
+<title>首页</title>
+<@h.easyui />
+<script type="text/javascript" src="${ctx}/js/zTree/js/jquery.ztree.core-3.5.min.js"></script>
+<link type="text/css" rel="stylesheet" href="${ctx}/js/zTree/css/zTreeStyle/zTreeStyle.css" />
+<script type="text/javascript" src="${ctx}/js/zTree/js/jquery.ztree.excheck-3.5.min.js"></script>  
+<script type="text/javascript">
+//zTree
+var setting = {  
+ async: {enable: true,type:'post',url:"${ctx}/menu/leftMenu"},     
+ data: {simpleData: {enable: true,idKey: "id",pIdKey: "pid",rootPId: 0},key:{name:'text'}},                      
+ callback: {       
+  onClick: zTreeOnClick,
+  onAsyncSuccess:zTreeOnAsyncSuccess
+ }  
+};  
+function zTreeOnClick(event, treeId, treeNode) {
+	var id=treeNode.id;
+	var url=treeNode.attributes.url;
+	var name=treeNode.text;
+	if(treeNode.pid==0){
+		return false;
+	}
+	qxTabAdd("tab_"+id,"iframe_"+id,name,ctx+url,true);
+};
+function zTreeOnAsyncSuccess(event, treeId, treeNode, msg) {
+	//展开全部
+	/*
+	var treeObj = $.fn.zTree.getZTreeObj("leftmenu");
+	treeObj.expandAll(true);
+	*/
+	//展开第一个
+	var treeObj = $.fn.zTree.getZTreeObj("leftmenu");
+	var nodes = treeObj.getNodes();
+	if (nodes.length>0) {
+		treeObj.expandNode(nodes[0], true, true, true);
+	}
+};
+$(document).ready(function(){//初始化ztree对象       
+ $.fn.zTree.init($("#leftmenu"), setting);  
+
+});  
+
+</script>
+</head>
+<body class="easyui-layout">
+    <noscript>您的浏览器不支持JavaScript,请检查您的浏览器版本或者安全设置,谢谢！</noscript>
+    <!-- 北布局开始 -->
+    <div id="springrain-index-north" data-options="region:'north', border:true" style="height:100%;width:100%;background:#F2F2F2;height: 85px; padding: 1px; overflow: hidden; position: relative;">
+      <div id="sessionInfoDiv" style="position: absolute; right: 0px; top: 0px;" class="alert alert-info">
+      </div>
+    <div style="position: absolute; right: 0px; bottom: 0px;">
+        <a href="javascript:void(0);" class="easyui-menubutton" data-options="menu:'#layout_north_kzmbMenu',iconCls:'icon-help'">控制面板</a> 
+        <a href="javascript:logoutFun(true);" class="easyui-linkbutton"  plain="true"  iconCls="icon-back">注销</a>
+        <!-- 菜单开始 -->
+            <div id="layout_north_kzmbMenu" style="width: 100px; display: none;">
+                <div onclick="editCurrentUserPwd();">修改密码</div>
+                <div class="menu-sep"></div>
+                <div onclick="currentUserRole();">个人信息</div>
+
+            </div>
+            
+        <!-- 菜单结束 -->
+    </div>
+    </div>
+    <!-- 北布局结束 -->
+    <!-- 西布局开始 -->
+    <div data-options="region:'west', split:true, title:'欢迎您！${currUserName!''}'" style="width: 200px;">
+        <div id="springrain-index-menuTree" class="zTreeDemoBackground left" id="menuTree">
+           		<ul id="leftmenu" class="ztree"></ul>
+        </div>
+    </div>
+    <!-- 西布局结束 -->
+    <!-- 中布局开始 -->
+    <div id="springrain-index-center" data-options="region:'center'" style="padding-button: 5px;">
+          <div id="systemTabs" class="easyui-tabs" fit="true" border="true">
+          <div id="firstTab" title="首页" style="padding:10px;overflow:hidden;"> 
+            <div style="margin-top:20px;">
+                              哇咔咔,我是主页.<br/>
+                              1.原项目9iuspring更名为springrain<br/>
+                              2.升级spring至3.2.4<br/>
+                              3.添加shiro控制权限(按钮级)<br/>
+                              4 .完善代码生成器,并生成默认权限的sql语句<br/>
+                              5.优化页面显示,并实现默认的demo<br/>
+                              6.增加新的扩展方法,增强灵活性和定制性<br/>
+                              7.默认实现访问日志功能<br/>
+                              8.此版本已用于生产环境<br/>
+                              
+                     
+            </div>
+          </div>
+         </div>  
+    </div>
+    <!-- 中布局结束 -->
+    
+    <!-- 南部布局开始  -->
+        <div  data-options="region:'south',border:false"  style="height:26px" >
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td align="center">2012©  版权所有 &nbsp;&nbsp;
+                        <a href="#">帮助关于 </a></td>
+                    </tr>
+            </table>
+        </div>
+    <!-- 南部布局结束 -->
+    <!-- menu begin -->
+    <div id="springrain-index-tabsMenu" class="easyui-menu"
+        style="width: 150px; display: none;">
+        <div name="m-updateTab">刷新</div>
+        <div class="menu-sep"></div>
+        <div name="m-closeTab">关闭</div>
+        <div name="m-closeAllTab">全部关闭</div>
+        <div name="m-closeOtherTab">除此之外全部关闭</div>
+        <div class="menu-sep"></div>
+        <div name="m-closeThisLeft">当前页左侧全部关闭</div>
+        <div name="m-closeThisRight">当前页右侧全部关闭</div>
+    </div>
+    <!-- menu end -->
+    <!-- springrainindex-dialog开始 -->
+    <div id="springrain-index-dialog" class="easyui-dialog" data-options="closed:'true'"></div>
+    <!-- springrainindex-dialog结束 -->
+</body>
+<script type="text/javascript">
+    $(function() {
+       /*
+    	$('#menuTree').tree({ 
+            url:"${ctx}/menu/leftMenu",
+            onClick: function(node){
+               	qxTabAdd("tab_"+node.id,"iframe_"+node.id,node.text,ctx+node.attributes.url,true);
+            }
+        });*/  
+    });
+    function logoutFun(){
+    	myconfirm("确定退出系统?",function(){
+    		 self.location="${ctx}/logout";
+    	});
+    }
+    function qxTabAdd(tabId,iframeId,tabTitle,tabHref,isCloseMenu){
+    	//var nowDate = new Date();
+       //	tabTitle=tabTitle+nowDate.getTime();
+    	var content = '<iframe  scrolling="yes"    id="'+iframeId+'"  class="tabIframe" frameborder="0" src="'
+    		+ tabHref
+    		+ '" style="width:100%;height:100%;"></iframe>';
+    	var systemTabs = jQuery('#systemTabs'); 
+    	var title = jQuery.trim(tabTitle);
+    	if (systemTabs.tabs('exists', title)) {
+    		systemTabs.tabs('select', title);
+    		return;
+    	}		
+    	jQuery('#systemTabs').tabs('add', {
+    			id : "tabs_" + tabId,
+    			title : tabTitle,
+    			content : content,
+    			closable : true
+    		});	
+    	if(isCloseMenu | false){
+    		jQuery('#systemTabs').tabs('close',{forceClose:true});
+    	}
+    };
+    //关闭
+    function qxTabClose(){
+		var currTitle=jQuery('#systemTabs').tabs("getSelected").panel('options').title;
+		jQuery('#systemTabs').tabs('close',currTitle);
+	}
+</script>
+</html>

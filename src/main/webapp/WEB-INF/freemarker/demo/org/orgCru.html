@@ -1,0 +1,50 @@
+
+<@h.easyui />
+<script type="text/javascript" src="${ctx}/js/demo/org/orgCru.js"></script>
+
+
+
+<script type="text/javascript">
+<!--
+jQuery(document).ready(function(){
+
+});
+//-->
+</script>
+
+
+<form id="updateForm" name="updateForm"  method="post" action="${ctx}/org/update" >
+<input type="hidden" name="commTabId" id="commTabId" value="${commTabId!''}"  />
+<!--input  hidden  Start-->
+	<input type="hidden" id="id" name="id" value="${(org.id)!''}"/>	
+<!--input  hidden  End-->
+	<table class="tb_6">	
+		<!-- Start-->
+			<tr>
+				<th>名称:</th>	
+					<!-- 字符型 -->
+					<td>
+					<input type="text" id="name" name="name" value="${(org.name)!''}" maxlength="60"   class="easyui-validatebox" data-options="required:true"/>
+					</td>	
+			</tr>
+			<tr>
+				<th>代码:</th>	
+					<!-- 字符型 -->
+					<td>
+					<input type="text" id="comcode" name="comcode" value="${(org.comcode)!''}" maxlength="40"   class="easyui-validatebox" data-options="required:true"/>
+					</td>	
+			</tr>
+			<tr>
+				<th>是否有效:</th>	
+					<!-- 字符型 -->
+					<td>
+					<select id="state" name="state" class="easyui-validatebox" data-options="required:true">
+						<option value="">==请选择==</option>
+						<option value="是">是</option>
+						<option value="否">否</option>
+					</select>
+					</td>	
+			</tr>
+	</table>
+	<input type="button" onclick="submitUpdateForm();" class="btn_7"/>
+</form>

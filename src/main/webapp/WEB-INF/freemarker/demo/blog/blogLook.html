@@ -1,0 +1,25 @@
+
+<@h.easyui />
+
+
+<input type="hidden" name="commTabId" id="commTabId" value="${commTabId!''}"  />
+<!--input  hidden  Start-->
+	<input type="hidden" id="id" name="id" value="${(blog.id)!''}"/>	
+<!--input  hidden  End-->
+	<table class="tb_6">	
+		<!-- Start-->
+			<tr>
+				<th><span >*</span>标题:</th>	
+					<!-- 字符型 -->
+					<td>
+					${(blog.title)!''} 
+					</td>	
+			</tr>
+			<tr>
+				<th><span >*</span>内容:</th>	
+					<!-- 字符型 -->
+					<td>
+					${(blog.content)!''} 
+					</td>	
+			</tr>
+	</table>

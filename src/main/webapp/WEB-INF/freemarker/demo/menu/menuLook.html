@@ -1,0 +1,53 @@
+
+<@h.easyui />
+
+
+<input type="hidden" name="commTabId" id="commTabId" value="${commTabId!''}"  />
+<!--input  hidden  Start-->
+	<input type="hidden" id="id" name="id" value="${(menu.id)!''}"/>	
+<!--input  hidden  End-->
+	<table class="tb_6">	
+		<!-- Start-->
+			<tr>
+				<th>name:</th>	
+					<!-- 字符型 -->
+					<td>
+					${(menu.name)!''} 
+					</td>	
+			</tr>
+			<tr>
+				<th>pid:</th>	
+					<!-- 字符型 -->
+					<td>
+					${(menu.pid)!''} 
+					</td>	
+			</tr>
+			<tr>
+				<th>description:</th>	
+					<!-- 字符型 -->
+					<td>
+					${(menu.description)!''} 
+					</td>	
+			</tr>
+			<tr>
+				<th>pageurl:</th>	
+					<!-- 字符型 -->
+					<td>
+					${(menu.pageurl)!''} 
+					</td>	
+			</tr>
+			<tr>
+				<th>0.普通资源1.菜单资源:</th>	
+					<!-- 字符型 -->
+					<td>
+					${(menu.type)!''} 
+					</td>	
+			</tr>
+			<tr>
+				<th>状态,是否有效(0:否1:是):</th>	
+					<!-- 字符型 -->
+					<td>
+					${(menu.state)!''} 
+					</td>	
+			</tr>
+	</table>

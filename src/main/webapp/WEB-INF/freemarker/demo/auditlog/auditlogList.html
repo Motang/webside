@@ -1,0 +1,133 @@
+
+<@h.easyui />
+<script type="text/javascript" src="${ctx}/js/plugins/jquery.checkbox.js"></script>
+<script type="text/javascript" src="${ctx}/js/demo/auditlog/auditlog.js"></script>
+		<script type="text/javascript" src="${ctx}/js/my97/WdatePicker.js"></script>
+</head>
+
+<script type="text/javascript">
+<!--
+jQuery(document).ready(function(){
+     //初始化 排序图标
+    initSortTable("listDataTable","searchForm");
+	//添加颜色改变
+	mouseTrColor("listDataTable");
+	
+});
+//-->
+</script>
+
+<body>
+<!-- 操作菜单 -->
+	<div class="head">
+		<div class="path">操作记录管理</div>
+	</div>
+	<div class="contents">
+<!-- 查询 -->
+<form name="searchForm" id="searchForm" method="post" action="${ctx}/auditlog/list" >
+<input type="hidden" name="pageIndex" id="pageIndex" value="${(page.pageIndex)!'1'}" />
+<input type="hidden" name="commTabId" id="commTabId" value="${commTabId!''}"  />
+<input type="hidden" name="sort" id="page_sort" value="${(page.sort)!'desc'}"  />
+<input type="hidden" name="order" id="page_order" value="${(page.order)!'id'}"  />
+		<table class="tb_2">
+			<tr>
+			
+	         <td>操作类型:<input type="text" id="operationType" name="operationType"  class="inp_2" /></td>
+	         <td>操作人姓名:<input type="text" id="operatorName" name="operatorName"  class="inp_2" /></td>
+	         <td>旧值:<input type="text" id="preValue" name="preValue"  class="inp_2" /></td>
+	         <td>新值:<input type="text" id="curValue" name="curValue"  class="inp_2" /></td>
+			  <td>操作时间:<input type="text" id="operationTime" name="operationTime"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="readonly" value="${((auditlog.operationTime)?string('yyyy-MM-dd'))!'' }"   class="inp_2" /></td>
+	         <td>操作类:<input type="text" id="operationClass" name="operationClass"  class="inp_2" /></td>
+	         <td>记录ID:<input type="text" id="operationClassID" name="operationClassID"  class="inp_2" /></td>
+				<td>
+					<input type="button" onclick="submitForm('searchForm');"  value="搜 索" class="btn_search"  />  
+				</td>
+			</tr>
+		</table>
+		</form>
+		
+<!-- 数据列表 -->
+		<dl class="box_1">
+			<dt>
+				<div>数据</div>
+				<a class="a_1" href="javascript:export_excel('searchForm');">导出</a><div class="img_2" ></div>
+				<a class="a_3" href="javascript:f_newTab('add_auditlog','add_auditlog','add_auditlog','${ctx}/auditlog/update/pre');">添加</a><div class="img_2" ></div>
+				<a class="a_0" href="javascript:delMulti();">删除选中</a><div class="img_2"></div>
+			</dt>
+			<dd>
+			
+			
+			<!--start_export-->
+				<table  id="listDataTable" border="1" class="tb_2">
+			<!--end_no_export-->
+			<!--first_start_export-->
+					<tr id="table_first_tr"  bgcolor="#F1F1F1" >
+					<!--first_start_no_export-->
+						<th><input type="checkbox" name="check_all" id="check_all"/></th>
+						<th width="100px;">操作</th>
+					<!--first_end_no_export-->
+						<th id="th_operationType" >操作类型</th>
+						<th id="th_operatorName" >操作人姓名</th>
+						<th id="th_preValue" >旧值</th>
+						<th id="th_curValue" >新值</th>
+						<th id="th_operationTime" >操作时间</th>
+						<th id="th_operationClass" >操作类</th>
+						<th id="th_operationClassID" >记录ID</th>
+						
+					</tr>
+				<!--first_end_export-->
+				
+				<!--start_export-->
+				   <#if datas??&&((datas?size)>0)>
+					<#list datas as data>
+						<tr>
+				<!--start_no_export-->
+						<#if (datas?size > 0)>
+							<td align="center">
+								<input type="checkbox" name="check_li" value="${data.id}" />
+							</td>
+						</#if>
+						
+						<td style="text-align:center;">
+								<a href="javascript:f_newTab('${data.id}_update','${data.id}_update','${data.id}_update','${ctx}/auditlog/update/pre?id=${data.id}');">修改</a>
+								  /  <a href="javascript:delAuditlog('${data.id}');">删除</a>/<a href="javascript:f_newTab('${data.id}_look','${data.id}_look','${data.id}_look','${ctx}/auditlog/look?id=${data.id}');">查看</a>
+						</td>
+				<!--end_no_export-->
+						
+							<td >
+								${(data.operationType)!''}
+							</td>
+							<td >
+								${(data.operatorName)!''}
+							</td>
+							<td >
+								${(data.preValue)!''}
+							</td>
+							<td >
+								${(data.curValue)!''}
+							</td>
+							<td >
+								<!--日期型-->
+							${((data.operationTime)?string('yyyy-MM-dd'))!''}
+							</td>
+							<td >
+								${(data.operationClass)!''}
+							</td>
+							<td >
+								${(data.operationClassID)!''}
+							</td>
+							
+						</tr>
+					</#list>
+					 </#if>
+				</table>
+			 <!--end_export-->
+			</dd>
+<#if page??>		
+<!-- 分页 -->
+	  <@h.pagetoolbar page=page formName='searchForm'/>
+</#if>
+		</dl>
+	</div>
+</body>
+</html>

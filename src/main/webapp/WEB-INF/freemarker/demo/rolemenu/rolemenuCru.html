@@ -1,0 +1,39 @@
+
+<@h.easyui />
+<script type="text/javascript" src="${ctx}/js/demo/rolemenu/rolemenuCru.js"></script>
+
+
+
+<script type="text/javascript">
+<!--
+jQuery(document).ready(function(){
+
+});
+//-->
+</script>
+
+
+<form id="updateForm" name="updateForm"  method="post" action="${ctx}/rolemenu/update" >
+<input type="hidden" name="commTabId" id="commTabId" value="${commTabId!''}"  />
+<!--input  hidden  Start-->
+	<input type="hidden" id="id" name="id" value="${(roleMenu.id)!''}"/>	
+<!--input  hidden  End-->
+	<table class="tb_6">	
+		<!-- Start-->
+			<tr>
+				<th><span >*</span>角色编号:</th>	
+					<!-- 字符型 -->
+					<td>
+					<input type="text" id="roleId" name="roleId" value="${(roleMenu.roleId)!''}" maxlength="40"  class="easyui-validatebox" data-options="required:true,validType:['length[1,40]']"  />
+					</td>	
+			</tr>
+			<tr>
+				<th><span >*</span>菜单编号:</th>	
+					<!-- 字符型 -->
+					<td>
+					<input type="text" id="menuId" name="menuId" value="${(roleMenu.menuId)!''}" maxlength="40"  class="easyui-validatebox" data-options="required:true,validType:['length[1,40]']"  />
+					</td>	
+			</tr>
+	</table>
+	<input type="button" onclick="submitUpdateForm();" class="btn_7"/>
+</form>

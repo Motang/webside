@@ -1,0 +1,77 @@
+
+<@h.easyui />
+<script type="text/javascript" src="${ctx}/js/demo/auditlog/auditlogCru.js"></script>
+
+		<script type="text/javascript" src="${ctx}/js/my97/WdatePicker.js"></script>
+
+
+<script type="text/javascript">
+<!--
+jQuery(document).ready(function(){
+
+});
+//-->
+</script>
+
+
+<form id="updateForm" name="updateForm"  method="post" action="${ctx}/auditlog/update" >
+<input type="hidden" name="commTabId" id="commTabId" value="${commTabId!''}"  />
+<!--input  hidden  Start-->
+	<input type="hidden" id="id" name="id" value="${(auditlog.id)!''}"/>	
+<!--input  hidden  End-->
+	<table class="tb_6">	
+		<!-- Start-->
+			<tr>
+				<th>操作类型:</th>	
+					<!-- 字符型 -->
+					<td>
+					<input type="text" id="operationType" name="operationType" value="${(auditlog.operationType)!''}" maxlength="50"  />
+					</td>	
+			</tr>
+			<tr>
+				<th>操作人姓名:</th>	
+					<!-- 字符型 -->
+					<td>
+					<input type="text" id="operatorName" name="operatorName" value="${(auditlog.operatorName)!''}" maxlength="50"  />
+					</td>	
+			</tr>
+			<tr>
+				<th>旧值:</th>	
+					<!-- 字符型 -->
+					<td>
+					<input type="text" id="preValue" name="preValue" value="${(auditlog.preValue)!''}" maxlength="8000"  />
+					</td>	
+			</tr>
+			<tr>
+				<th>新值:</th>	
+					<!-- 字符型 -->
+					<td>
+					<input type="text" id="curValue" name="curValue" value="${(auditlog.curValue)!''}" maxlength="8000"  />
+					</td>	
+			</tr>
+			<tr>
+				<th>操作时间:</th>	
+					<!--日期型-->
+					<td>
+					<input type="text" id="operationTime" name="operationTime" 
+					 
+					style="width:150px;" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="readonly" value="${((auditlog.operationTime)?string('yyyy-MM-dd'))!'' }" />
+					</td>
+			</tr>
+			<tr>
+				<th>操作类:</th>	
+					<!-- 字符型 -->
+					<td>
+					<input type="text" id="operationClass" name="operationClass" value="${(auditlog.operationClass)!''}" maxlength="500"  />
+					</td>	
+			</tr>
+			<tr>
+				<th>记录ID:</th>	
+					<!-- 字符型 -->
+					<td>
+					<input type="text" id="operationClassID" name="operationClassID" value="${(auditlog.operationClassID)!''}" maxlength="50"  />
+					</td>	
+			</tr>
+	</table>
+	<input type="button" onclick="submitUpdateForm();" class="btn_7"/>
+</form>

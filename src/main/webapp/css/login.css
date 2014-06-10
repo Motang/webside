@@ -1,0 +1,35 @@
+html,body,ul,li,p,form,fieldset,h1,h2,h3,input,button {margin:0;padding:0;}
+fieldset,img,input {border:none 0;}
+input, img {vertical-align:middle;}
+li {list-style:none;}
+html {background:#0F8CC3 url(../images/login/bg01.png) repeat-x 50% 0;}
+body {width:990px;margin:0 auto;background:url(../images/login/bg_body.png) no-repeat 50% 0;_background:url(../images/login/bg_body_ie6.jpg) no-repeat 50% 0;font:12px/1.6 "微软雅黑", YaHei, "宋体",SimSun, sans-serif;}
+a {color:#0066CC;text-decoration:underline;}
+a:hover {color:#CC0000;}
+.box {width:600px;margin:auto;}
+.head {height:120px;background:url() no-repeat 50% 70%;_background:url() no-repeat 50% 70%;}<!-- 头部logo代码 ->
+.logo,.head h2{display:none;}
+.main {width:572px;height:372px;margin:auto;padding:20px;overflow:hidden;background:url(../images/login/bg_main.png) no-repeat;_background:url(../images/login/bg_main_ie6.png) no-repeat;}
+
+.main h2,.formUser,.formPW,.btnLogin {background:url(../images/login/sprites.png) no-repeat;}
+
+.main h2 {height:1.5em;padding-left:10px;overflow:hidden;background-position:-174px -146px;font-size:1.333em;}
+.login {clear:both;}
+.login .boxBD {width:226px;margin:auto;}
+.login form b {display:none;}
+.login li,.btnWrap {margin:15px 0;padding-left:44px;}
+.formUser,.formPW {height:32px;background-position:-149px -44px;}
+.formPW {background-position:-149px -97px;}
+.inputText {width:170px;height:20px;padding:5px;border-radius:5px;border:1px solid #898989;background:#FFFFFF;font-size:14px;line-height:20px;}
+.check{height:20px; padding:5px;}
+.formVCode .inputText {width:60px;padding:0 4px;margin-right:5px;}
+.refresh {float:right;*margin-top:-18px;}
+.btnWrap {clear:both;}
+.regWrap {float:right;margin:-40px 0 0;}
+.btnLogin {width:130px;height:40px;background-position:0 -97px;color:#FFFFFF;font:bolder 20px/40px "微软雅黑", YaHei, "宋体",SimSun, sans-serif;text-align:center;cursor:pointer;}
+.info {height:50px;border:2px dotted #AAAAAA;border-width:2px 0;line-height:50px;}
+.info .phone,.info .email {float:left;width:49.99%;color:#1A6600;font-size:14px;text-align:center;}
+.infodetail  {float:left;width:80%;color:#000000;font-size:14px;text-align:left;padding:10px;}
+.system {clear:both;padding-top:15px;}
+.system .boxBD {margin:10px;height:24px;overflow:hidden;line-height:24px;}
+.copyright {text-align:center;}

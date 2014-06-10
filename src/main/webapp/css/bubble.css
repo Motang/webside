@@ -1,0 +1,136 @@
+@charset "utf-8";
+/*
+ * CSS实现Bubble提示框
+ * author:Mr.Hao
+ */
+.poptip {
+	margin-left:10px;
+	float:left;
+    position:relative;
+    padding: 6px 10px 5px;*
+
+padding:
+    7px 10px 4px;
+
+line-height:
+    16px;
+
+color:
+    #DB7C22;
+
+font-size:
+    12px;
+
+background-color:
+    #FFFCEF;
+
+border:solid
+    1px #FFBB76;
+
+border-radius:
+    2px;
+
+box-shadow:
+    0 0 3px #ddd;
+}
+
+.poptip-arrow {
+    position: absolute;
+    overflow: hidden;
+    font-style: normal;
+    font-family: simsun;
+    font-size: 12px;
+    text-shadow: 0 0 2px #ccc;
+}
+
+.poptip-arrow em, .poptip-arrow i {
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-style: normal;
+}
+
+.poptip-arrow em {
+    color: #FFBB76;
+}
+
+.poptip-arrow i {
+    color: #FFFCEF;
+    text-shadow: none;
+}
+
+.poptip-arrow-top, .poptip-arrow-bottom {
+    height: 6px;
+    width: 12px;
+    left: 12px;
+    margin-left: -6px;
+}
+
+.poptip-arrow-left, .poptip-arrow-right {
+    height: 12px;
+    width: 6px;
+    top: 12px;
+    margin-top: -6px;
+}
+
+.poptip-arrow-top {
+    top: -6px;
+}
+
+.poptip-arrow-top em {
+    top: -1px;
+}
+
+.poptip-arrow-top i {
+    top: 0px;
+}
+
+.poptip-arrow-bottom {
+    bottom: -6px;
+}
+
+.poptip-arrow-bottom em {
+    top: -8px;
+}
+
+.poptip-arrow-bottom i {
+    top: -9px;
+}
+
+.poptip-arrow-left {
+    left: -6px;
+}
+
+.poptip-arrow-left em {
+    left: 1px;
+}
+
+.poptip-arrow-left i {
+    left: 2px;
+}
+
+.poptip-arrow-right {
+    right: -6px;
+}
+
+.poptip-arrow-right em {
+    left: -6px;
+}
+
+.poptip-arrow-right i {
+    left: -7px;
+}
+
+/*
+ <div class="poptip">
+ <span class="poptip-arrow poptip-arrow-top"><em>◆</em><i>◆</i></span>
+ <span class="poptip-arrow poptip-arrow-right"><em>◆</em><i>◆</i></span>
+ <span class="poptip-arrow poptip-arrow-bottom"><em>◆</em><i>◆</i></span>
+ <span class="poptip-arrow poptip-arrow-left"><em>◆</em><i>◆</i></span>
+ Hi<br>瞧见了吧！
+ </div>
+ <em>&#9670;</em><em>&#9670;</em> 填充实心的三角
+ <em> 标签告诉浏览器把其中的文本表示为强调的内容。对于所有浏览器来说，这意味着要把这段文字用斜体来显示。
+ 如果你只想使用斜体字来显示文本的话，请使用 <i> 标签。除此之外，文档中还可以包括用来改变文本显示的级联样式定义。
+ 除强调之外，当引入新的术语或在引用特定类型的术语或概念时作为固定样式的时候，也可以考虑使用 <em> 标签。
+ */ 

@@ -1,0 +1,39 @@
+
+<@h.easyui />
+<script type="text/javascript" src="${ctx}/js/demo/blog/blogCru.js"></script>
+
+
+
+<script type="text/javascript">
+<!--
+jQuery(document).ready(function(){
+
+});
+//-->
+</script>
+
+
+<form id="updateForm" name="updateForm"  method="post" action="${ctx}/blog/update" >
+<input type="hidden" name="commTabId" id="commTabId" value="${commTabId!''}"  />
+<!--input  hidden  Start-->
+	<input type="hidden" id="id" name="id" value="${(blog.id)!''}"/>	
+<!--input  hidden  End-->
+	<table class="tb_6">	
+		<!-- Start-->
+			<tr>
+				<th><span >*</span>标题:</th>	
+					<!-- 字符型 -->
+					<td>
+					<input type="text" id="title" name="title" value="${(blog.title)!''}" maxlength="200"  class="easyui-validatebox" data-options="required:true,validType:['length[1,200]']"  />
+					</td>	
+			</tr>
+			<tr>
+				<th><span >*</span>内容:</th>	
+					<!-- 字符型 -->
+					<td>
+					<input type="text" id="content" name="content" value="${(blog.content)!''}" maxlength="16777215"  class="easyui-validatebox" data-options="required:true,validType:['length[1,16777215]']"  />
+					</td>	
+			</tr>
+	</table>
+	<input type="button" onclick="submitUpdateForm();" class="btn_7"/>
+</form>

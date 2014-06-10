@@ -1,0 +1,74 @@
+
+<@h.easyui />
+
+
+<input type="hidden" name="commTabId" id="commTabId" value="${commTabId!''}"  />
+<!--input  hidden  Start-->
+	<input type="hidden" id="id" name="id" value="${(org.id)!''}"/>	
+<!--input  hidden  End-->
+	<table class="tb_6">	
+		<!-- Start-->
+			<tr>
+				<th>名称:</th>	
+					<!-- 字符型 -->
+					<td>
+					${(org.name)!''} 
+					</td>	
+			</tr>
+			<tr>
+				<th>代码:</th>	
+					<!-- 字符型 -->
+					<td>
+					${(org.comcode)!''} 
+					</td>	
+			</tr>
+			<tr>
+				<th>上级部门ID:</th>	
+					<!-- 字符型 -->
+					<td>
+					${(org.pid)!''} 
+					</td>	
+			</tr>
+			<tr>
+				<th>子系统ID:</th>	
+					<!-- 字符型 -->
+					<td>
+					${(org.sysid)!''} 
+					</td>	
+			</tr>
+			<tr>
+				<th>0,组织机构 1.部门:</th>	
+					<!-- 字符型 -->
+					<td>
+					${(org.type)!''} 
+					</td>	
+			</tr>
+			<tr>
+				<th>叶子节点(0:树枝节点;1:叶子节点):</th>	
+					<!-- 字符型 -->
+					<td>
+					${(org.leaf)!''} 
+					</td>	
+			</tr>
+			<tr>
+				<th>排序号:</th>	
+					<!-- 字符型 -->
+					<td>
+					${(org.sortno)!''} 
+					</td>	
+			</tr>
+			<tr>
+				<th>描述:</th>	
+					<!-- 字符型 -->
+					<td>
+					${(org.description)!''} 
+					</td>	
+			</tr>
+			<tr>
+				<th>状态,是否有效(0:否1:是):</th>	
+					<!-- 字符型 -->
+					<td>
+					${(org.state)!''} 
+					</td>	
+			</tr>
+	</table>

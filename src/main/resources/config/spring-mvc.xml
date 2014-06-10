@@ -54,8 +54,10 @@
 
     <!-- 静态资源映射 -->
     <!-- <mvc:resources mapping="/static/img/**" location="http://localhost:8082/docs/images/"/> -->
-    <mvc:resources mapping="/static/**" location="/WEB-INF/static/"/>
     <mvc:resources mapping="/html/**" location="/WEB-INF/html/"/>
+    <mvc:resources mapping="/images/**" location="/images/" />
+    <mvc:resources mapping="/js/**" location="/js/" />
+    <mvc:resources mapping="/css/**" location="/css/" />
     
      <!-- 内容协商管理器  -->
     <!--1、首先检查路径扩展名（如my.pdf）；2、其次检查Parameter（如my?format=pdf）；3、检查Accept Header-->
@@ -113,18 +115,46 @@
         </property>
         <property name="order" value="0"/>
     </bean>
+    
+    <bean id="freemarkerViewResolver"
+        class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="requestContextAttribute" value="ctp" />
+        <property name="cache" value="true" />
+        <property name="prefix" value="" />
+        <property name="suffix" value=".html" />
+        <property name="contentType" value="text/html;charset=UTF-8" />
+        <property name="order" value="1" />
+    </bean>
+    
+    <bean id="freemarkerConfiguration"
+        class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="location" value="classpath:config/freemarker/freemarker.properties" />
+    </bean>
+    
+    <bean id="freeMarkerConfigurer"
+        class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath" value="/WEB-INF/freemarker/" />
+        <property name="defaultEncoding" value="UTF-8" />
+        <property name="freemarkerSettings" ref="freemarkerConfiguration" />
+        <property name="freemarkerVariables">  
+            <map>   
+                <entry key="shiro"  value-ref="shiroTags"/>   
+            </map>   
+        </property>  
+    </bean>
+    <bean id="shiroTags" class="com.motang.framework.shiro.freemarkertag.ShiroTags"></bean>
 
     <!-- 默认的视图解析器 在上边的解析错误时使用 (默认使用html)- -->
-    <bean id="defaultViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
         <property name="contentType" value="text/html"/>
         <property name="prefix" value="/WEB-INF/jsp/"/>
         <property name="suffix" value=".jsp"/>
-        <property name="order" value="1"/>
+        <property name="order" value="2"/>
     </bean>
     
     
-    <context:component-scan base-package="com.motang.webside.controller" />
+    <context:component-scan base-package="com.motang.webside.web" />
     
     <!-- 国际化的消息资源文件（本系统中主要用于显示/错误消息定制） -->
     <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">

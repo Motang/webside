@@ -29,7 +29,7 @@
      http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
  
     <!-- refer configuration of database -->
-    <context:property-placeholder location="classpath:config/db/db.properties" />
+    <context:property-placeholder location="classpath:resources.properties" />
     
     <!-- 
     <jdbc:initialize-database data-source="dataSource" ignore-failures="ALL">

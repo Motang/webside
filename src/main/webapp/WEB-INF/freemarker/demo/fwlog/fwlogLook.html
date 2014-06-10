@@ -1,0 +1,82 @@
+
+<@h.easyui />
+
+
+<input type="hidden" name="commTabId" id="commTabId" value="${commTabId!''}"  />
+<!--input  hidden  Start-->
+	<input type="hidden" id="id" name="id" value="${(fwlog.id)!''}"/>	
+<!--input  hidden  End-->
+	<table class="tb_6">	
+		<!-- Start-->
+			<tr>
+				<th>访问时间:</th>	
+					<!--日期型-->
+					<td>
+					  ${((fwlog.startDate)?string('yyyy-MM-dd'))!'' }
+					</td>
+		
+			</tr>
+			<tr>
+				<th>访问时间(毫秒):</th>	
+					<!-- 字符型 -->
+					<td>
+					${(fwlog.strDate)!''} 
+					</td>	
+			</tr>
+			<tr>
+				<th>Tomcat:</th>	
+					<!-- 字符型 -->
+					<td>
+					${(fwlog.tomcat)!''} 
+					</td>	
+			</tr>
+			<tr>
+				<th>登陆账号:</th>	
+					<!-- 字符型 -->
+					<td>
+					${(fwlog.userCode)!''} 
+					</td>	
+			</tr>
+			<tr>
+				<th>姓名:</th>	
+					<!-- 字符型 -->
+					<td>
+					${(fwlog.userName)!''} 
+					</td>	
+			</tr>
+			<tr>
+				<th>sessionId:</th>	
+					<!-- 字符型 -->
+					<td>
+					${(fwlog.sessionId)!''} 
+					</td>	
+			</tr>
+			<tr>
+				<th>IP:</th>	
+					<!-- 字符型 -->
+					<td>
+					${(fwlog.ip)!''} 
+					</td>	
+			</tr>
+			<tr>
+				<th>访问菜单:</th>	
+					<!-- 字符型 -->
+					<td>
+					${(fwlog.fwUrl)!''} 
+					</td>	
+			</tr>
+			<tr>
+				<th>菜单名称:</th>	
+					<!-- 字符型 -->
+					<td>
+					${(fwlog.menuName)!''} 
+					</td>	
+			</tr>
+			<tr>
+				<th>是否有权限访问:</th>	
+					<!-- 字符型 -->
+					<td>
+					${(fwlog.isqx)!''} 
+					</td>	
+			</tr>
+	</table>

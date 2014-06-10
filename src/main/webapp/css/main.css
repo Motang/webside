@@ -1,0 +1,52 @@
+@charset "utf-8";
+/*===============================
+ * north部分的样式
+ *==============================*/
+
+.top { height:125px; width:100%; background:url(main/gxt_01.png) repeat-x; overflow:hidden;}
+.logo { height:70px; width:630px; margin-left:10px; background:url(main/gxt_03.png) no-repeat;}
+.fun { list-style:none;  position:absolute; top:5px; right:3px;}
+.fun li { float:left; margin-right:3px;}
+.fun li a { display:block; width:100px; height:30px; }
+.fun li.f_1 { background:url(main/gxt_06.png) no-repeat;}
+.fun li.f_2 { background:url(main/gxt_08.png) no-repeat;}
+.fun li.f_3 { background:url(main/mcip_01.png) no-repeat;}
+.fun li.f_4 { background:url(main/mcip_02.png) no-repeat;}
+.user {list-style:none; margin:20px 0 0 10px; padding:9px 0 0 35px; background:url(main/user.png) no-repeat; height:36px;}
+.user li { float:left;color:#FFF; font-size:14px; font-weight:bold;  margin-right:10px;}
+
+.nav { float:right; list-style:none; margin-top:16px; font-size:14px;  font-weight:bold;}
+.nav li { float:left; margin:0 10px;}
+.nav li a { display:inline-block; color:#FFF; text-decoration:none;  height:38px; padding:0 8px; line-height:38px;}
+.nav li a:hover { background:url(main/gxt_14.png); border:#9CC3DF solid; border-width:0 1px; padding:0 7px; }
+
+
+.sub { width:100px !important; list-style:none; padding:5px 0 5px 0px;}
+.sub li { height:25px; font-size:14px;}
+.sub li a { color:#13428A;  padding-left:15px; margin-left:0px; text-decoration:none;}
+
+.sub  li a:hover { color:#06C;}
+.icon_1 li a { background:url(main/bullet_go.png) no-repeat; }
+.icon_2 li a { background:url(main/bullet_go.png) no-repeat; }
+.icon_3 li a { background:url(main/bullet_go.png) no-repeat; }
+.icon_4 li a { background:url(main/bullet_go.png) no-repeat; }
+.icon_5 li a { background:url(main/bullet_go.png) no-repeat; }
+.current { display:block;}
+
+/*===============================
+ * south部分的样式
+ *==============================*/
+.south-back-main{
+	background: url(img/bottom_bg.jpg) repeat-x top;
+	height:25px;
+}
+
+.south-back-main table{
+	line-height:22px;
+}
+.south-back-main table tr td{
+	padding-left:10px;
+	border:1px solid #dfffef;
+}
+
+

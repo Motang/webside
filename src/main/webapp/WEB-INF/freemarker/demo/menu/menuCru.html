@@ -1,0 +1,141 @@
+
+<@h.easyui />
+<script type="text/javascript" src="${ctx}/js/demo/menu/menuCru.js"></script>
+<script type="text/javascript" src="${ctx}/js/zTree/js/jquery.ztree.core-3.5.min.js"></script>
+<link type="text/css" rel="stylesheet" href="${ctx}/js/zTree/css/zTreeStyle/zTreeStyle.css" />
+<script type="text/javascript" src="${ctx}/js/zTree/js/jquery.ztree.excheck-3.5.min.js"></script>  
+
+
+<script type="text/javascript">
+//zTree
+var setting = {  
+ async: {enable: true,type:'post',url:"${ctx}/menu/leftMenu",dataFilter: ajaxDataFilter},     
+ data: {simpleData: {enable: true,idKey: "id",pIdKey: "pid",rootPId: 0},key:{name:'text'}},                      
+ callback: {       
+  onClick: zTreeOnClick,
+  onAsyncSuccess:zTreeOnAsyncSuccess
+ }  
+};  
+function ajaxDataFilter(treeId, parentNode, responseData) {
+    if (responseData) {
+    	var add={"id":"-1","text":"<<无>>","pid":"0","attributes":{"url":""}};
+    	responseData.insert_first(add);
+    }
+    return responseData;
+};
+
+function zTreeOnClick(event, treeId, treeNode) {
+	var id=treeNode.id;
+	var url=treeNode.attributes.url;
+	var name=treeNode.text;
+	if(id==-1){
+		id=0;
+	}
+	jQuery('#pid').val(id);
+	jQuery('#pidName').html(name);
+};
+function zTreeOnAsyncSuccess(event, treeId, treeNode, msg) {
+	//展开全部
+	var treeObj = $.fn.zTree.getZTreeObj("leftmenu");
+	treeObj.expandAll(true);
+	 
+	/*
+	//展开第一个
+	var treeObj = $.fn.zTree.getZTreeObj("leftmenu");
+	var nodes = treeObj.getNodes();
+	if (nodes.length>0) {
+		treeObj.expandNode(nodes[0], true, true, true);
+	}*/
+};
+$(document).ready(function(){
+//初始化ztree对象       
+ jQuery.fn.zTree.init($("#leftmenu"), setting);  
+ <#if menu??>
+ 	var menuId="${menu.pid!''}";
+ 	jQuery('#pidName').html("${menu.pidName!''}");
+ 	var treeObj = $.fn.zTree.getZTreeObj("leftmenu");
+ 	var nodes = treeObj.getNodes();
+ 	//type与state
+ 	var type="${menu.type!''}";
+ 	jQuery('#type').val(type);
+ 	var state="${menu.state!''}"
+ 	jQuery('#state').val(state);
+ </#if>
+});  
+//
+//判断Array中是否含有某个元素
+Array.prototype.in_array = function(e){  
+for(i=0;i<this.length && this[i]!=e;i++);  
+	return !(i==this.length);
+}  
+//在数组元素的最前面加一个数据
+Array.prototype.insert_first = function(e){  
+	for(i=this.length;i>0;i--){
+		this[i]=this[i-1];
+	}
+	this[0]=e;
+}  
+</script>
+
+
+<form id="updateForm" name="updateForm"  method="post" action="${ctx}/menu/update" >
+<input type="hidden" name="commTabId" id="commTabId" value="${commTabId!''}"  />
+<!--input  hidden  Start-->
+	<input type="hidden" id="id" name="id" value="${(menu.id)!''}"/>	
+<!--input  hidden  End-->
+	<table class="tb_6">	
+		<!-- Start-->
+			<tr>
+				<th>菜单名称:</th>	
+					<!-- 字符型 -->
+					<td>
+					<input type="text" id="name" name="name" value="${(menu.name)!''}" maxlength="60"  />
+					</td>	
+			</tr>
+			<tr>
+				<th>菜单父类:</th>	
+					<!-- 字符型 -->
+					<td>
+					<span id="pidName" style="color:green">==选择父类==</span>
+					<input type="hidden" id="pid" name="pid" value="${(menu.pid)!''}" maxlength="40"  />
+					<ul id="leftmenu" class="ztree"></ul>
+						
+					</td>	
+			</tr>
+			<tr>
+				<th>描述:</th>	
+					<!-- 字符型 -->
+					<td>
+					<input type="text" id="description" name="description" value="${(menu.description)!''}" maxlength="65535"  />
+					</td>	
+			</tr>
+			<tr>
+				<th>页面地址:</th>	
+					<!-- 字符型 -->
+					<td>
+					<input type="text" id="pageurl" name="pageurl" value="${(menu.pageurl)!''}" maxlength="65535"  />
+					</td>	
+			</tr>
+			<tr>
+				<th>菜单类型</th>	
+					<!-- 字符型 -->
+					<td>
+					<select name="type" id="type">
+						<option value="0">普通资源</option>
+						<option value="1">菜单资源</option>
+					</select>
+					</td>	
+			</tr>
+			<tr>
+				<th>是否有效</th>	
+					<!-- 字符型 -->
+					<td>
+					<select id="state" name="state">
+						<option value="是">是</option>
+						<option value="否">否</option>
+					</select>
+					</td>	
+			</tr>
+	</table>
+	<input type="button" onclick="submitUpdateForm();" class="btn_7"/>
+</form>

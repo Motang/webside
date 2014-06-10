@@ -1,0 +1,94 @@
+@charset "utf-8";
+/*
+ * 修改select样式
+ * author:Mr.Hao
+ */
+.clearfloat {
+    height: 0;
+    font-size: 1px;
+    clear: both;
+    line-height: 0;
+}
+
+#container {
+    width: 100%;
+    text-align: left;
+    margin: 0 auto;
+}
+
+/*
+ .searchBar {
+ padding-left: 60px;
+ padding-top: 7px;
+ width: 590px;
+ margin: 40px auto;
+ height: 33px;
+ }
+ 
+ .searchBar .select {
+ FLOAT: left;
+ margin-top: 1px;
+ display: inline;
+ margin-right: 8px;
+ }
+ */
+.selectbox-wrapper {
+    BORDER-RIGHT: #b7d1eb 1px solid;
+    BORDER-TOP: #b7d1eb 0px solid;
+    MARGIN-TOP: -3px;
+    BORDER-LEFT: #b7d1eb 1px solid;
+    WIDTH: 63px;
+    BORDER-BOTTOM: #b7d1eb 1px solid;
+    POSITION: absolute;
+    BACKGROUND-COLOR: #fff;
+    TEXT-ALIGN: left
+}
+
+.selectbox-wrapper ul, .selectbox-wrapper ol, .selectbox-wrapper li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.selectbox-wrapper UL LI.selected {
+    BACKGROUND-COLOR: #e0ecf7;
+}
+
+.selectbox-wrapper UL LI.current {
+    COLOR: #fff;
+    BACKGROUND-COLOR: #36c
+}
+
+.selectbox-wrapper UL LI {
+    TEXT-ALIGN: left;
+    PADDING-RIGHT: 3px;
+    PADDING-LEFT: 3px;
+    PADDING-BOTTOM: 3px;
+    WIDTH: 57px;
+    CURSOR: pointer;
+    LINE-HEIGHT: 20px;
+    PADDING-TOP: 3px
+}
+
+.selectbox {
+    border: none;
+    DISPLAY: block;
+    padding-left: 4px;
+    width: 81px;
+    CURSOR: pointer;
+    padding-top: 1px;
+    HEIGHT: 23px;
+    BACKGROUND-COLOR: #fff;
+    BORDER: #b7d1eb 1px solid;
+    BORDER-RIGHT: #b7d1eb 0px solid;
+    background-image: url(../images/select_qi01.jpg);
+    background-repeat: no-repeat;
+    background-position: right;
+    /*background-attachment:fixed;保证该属性在 Firefox 和 Opera 中正常工作*/
+    /*background: url(../images/select_qi.gif) no-repeat;*/
+}

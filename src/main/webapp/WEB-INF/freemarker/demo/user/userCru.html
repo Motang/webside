@@ -1,0 +1,179 @@
+
+<@h.easyui />
+<script type="text/javascript" src="${ctx}/js/demo/user/userCru.js"></script>
+<script type="text/javascript" src="${ctx}/js/plugins/jquery.checkbox.js"></script>  
+<script type="text/javascript" src="${ctx}/js/plugins/jquery.dmselect.js"></script>  
+
+<script type="text/javascript">
+jQuery(document).ready(function(){
+	var gradeId="";
+	var roleId="";
+	<#if user??>
+		gradeId="${(user.gradeId)!''}";
+		roleId="${(user.roleId)!''}";
+		var sex="${(user.sex)!''}";
+		var state="${(user.state)!''}";
+		jQuery('#sex').val(sex);
+		jQuery('#state').val(state);
+	</#if>
+	
+	addOption("gradeId","${ctx}/dicdata/grade/ajax/findjson",'name','id',gradeId);
+	jQuery("#roleIdNames").dmselect("${ctx}/role/ajax/find_role_json",{hiddenId:"roleIds",checkboxName:"role_id",id:"id",ajaxValue:"name"});
+	
+	//addOption("roleId","${ctx}/role/find_role_json",'name','id',gradeId);
+	//role 
+});
+//selec加载 start
+function addOption(selectId,_url,textName,valName,defaultValue){
+ jQuery.ajax({
+  url:_url,
+  type:"POST",
+  dataType:"json",
+  success: function(json){
+      jQuery("#"+selectId).empty();
+      jQuery("#"+selectId).append("<option value=''>===请选择===</option>");
+      jQuery(json).each(function(i,_obj){
+        jQuery("#"+selectId).append("<option value='"+_obj[valName]+"'>"+_obj[textName]+"</option>");
+      });
+      if(defaultValue!=null&&defaultValue.length!=0){
+       jQuery("#"+selectId).val(defaultValue);
+      }
+     }
+ });
+}
+//selec加载 end
+//提交表单
+function submitUpdateForm(){
+var flag=jQuery("#updateForm").form("validate");
+if(flag){
+	submitForm("updateForm");
+}
+}
+</script>
+
+<form id="updateForm" name="updateForm"  method="post" action="${ctx}/user/update" >
+<input type="hidden" name="commTabId" id="commTabId" value="${commTabId!''}"  />
+<!--input  hidden  Start-->
+	<input type="hidden" id="id" name="id" value="${(user.id)!''}"/>	
+<!--input  hidden  End-->
+	<table class="tb_6">	
+		<!-- Start-->
+			<tr>
+				<th align="right">姓名:</th>	
+					<!-- 字符型 -->
+					<td>
+					<input type="text" id="name" name="name" value="${(user.name)!''}" maxlength="30"  class="easyui-validatebox" data-options="required:true" />
+					</td>	
+				<th align="right">工号:</th>	
+					<!-- 字符型 -->
+					<td>
+					<input type="text" id="workno" name="workno" value="${(user.workno)!''}" maxlength="40"  class="easyui-validatebox" data-options="required:true" />
+					</td>	
+			</tr>
+			<tr>
+				<th align="right">账号:</th>	
+					<!-- 字符型 -->
+					<td>
+					<input type="text" id="account" name="account" value="${(user.account)!''}" maxlength="40"  class="easyui-validatebox" data-options="required:true" />
+					</td>	
+				<th align="right">密码:</th>	
+					<!-- 字符型 -->
+					<td>
+					<input type="text" id="password" name="password" value="${(user.password)!''}" maxlength="40"   style="width: 200px;"  class="easyui-validatebox" data-options="required:true"/>
+					</td>	
+			</tr>
+			<tr>
+				<th align="right">级别:</th>	
+					<!-- 字符型 -->
+					<td>
+					<select id="gradeId" name="gradeId"  class="easyui-validatebox" data-options="required:true">
+					</select>
+					</td>	
+				<th align="right">身份证:</th>	
+					<!-- 字符型 -->
+					<td>
+					<input type="text" id="cardno" name="cardno" value="${(user.cardno)!''}" maxlength="40"   style="width: 200px;" class="easyui-validatebox" data-options="required:true"/>
+					</td>	
+			</tr>
+			<tr>
+				<th align="right">年龄:</th>	
+					<!-- 字符型 -->
+					<td>
+					<input type="text" id="age" name="age" value="${(user.age)!''}" maxlength="10"  />
+					</td>	
+				<th align="right">性别:</th>	
+					<!-- 字符型 -->
+					<td>
+						<select name="sex" id="sex"  >
+							<option value="">==请选择==</option>
+							<option value="男">男</option>
+							<option value="女">女</option>
+						</select>
+					</td>	
+			</tr>
+			<tr>
+				<th align="right">所属角色分配:</th>	
+					<!-- 字符型 -->
+					<td>
+					 	<input type="text" id="roleIdNames" name="roleIdNames" value="${(user.roleIdNames)!''}">
+						<input type="hidden" id="roleIds" name="roleIds" value="${(user.roleIds)!''}">
+					</td>	
+				<th align="right">用户可用状态:</th>	
+					<!-- 字符型 -->
+					<td>
+					<select  id='state' name="state"  class="easyui-validatebox" data-options="required:true">
+						<option value="">==请选择==</option>
+						<option value="是">是</option>
+						<option value="否">否</option>
+						<option value="离职">离职</option>
+					</select>
+					</td>	
+			</tr>
+			<tr>
+				<th align="right">电话号码:</th>	
+					<!-- 字符型 -->
+					<td>
+					<input type="text" id="phone" name="phone" value="${(user.phone)!''}" maxlength="16"  />
+					</td>	
+				<th align="right">手机号码:</th>	
+					<!-- 字符型 -->
+					<td>
+					<input type="text" id="mobile" name="mobile" value="${(user.mobile)!''}" maxlength="16"  />
+					</td>	
+			</tr>
+			<tr>
+				<th align="right">邮箱:</th>	
+					<!-- 字符型 -->
+					<td>
+					<input type="text" id="eamil" name="eamil" value="${(user.eamil)!''}" maxlength="60"  />
+					</td>	
+				<th align="right">地址:</th>	
+					<!-- 字符型 -->
+					<td>
+					<input type="text" id="address" name="address" value="${(user.address)!''}" maxlength="255"  style="width:200px;" />
+					</td>	
+			</tr>
+			<tr>
+				<th align="right">紧急联系人:</th>	
+					<!-- 字符型 -->
+					<td>
+					<input type="text" id="fireName" name="fireName" value="${(user.fireName)!''}" maxlength="30"  />
+					</td>	
+				<th align="right">紧急联系电话:</th>	
+					<!-- 字符型 -->
+					<td>
+					<input type="text" id="firePhone" name="firePhone" value="${(user.firePhone)!''}" maxlength="30"  />
+					</td>	
+			</tr>
+			<tr>
+				<th align="right">描述:</th>	
+					<!-- 字符型 -->
+					<td>
+					<input type="text" id="description" name="description" value="${(user.description)!''}" maxlength="65535"    />
+					</td>	
+				<th></th><td></td>
+			</tr>
+			
+	</table>
+	<input type="button" onclick="submitUpdateForm();" class="btn_7"/>
+</form>

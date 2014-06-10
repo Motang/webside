@@ -1,0 +1,98 @@
+
+<@h.easyui />
+<script type="text/javascript" src="${ctx}/js/dhx/fwlog/fwlogCru.js"></script>
+
+		<script type="text/javascript" src="${ctx}/js/my97/WdatePicker.js"></script>
+
+
+<script type="text/javascript">
+<!--
+jQuery(document).ready(function(){
+
+});
+//-->
+</script>
+
+
+<form id="updateForm" name="updateForm"  method="post" action="${ctx}/fwlog/update" >
+<input type="hidden" name="commTabId" id="commTabId" value="${commTabId!''}"  />
+<!--input  hidden  Start-->
+	<input type="hidden" id="id" name="id" value="${(fwlog.id)!''}"/>	
+<!--input  hidden  End-->
+	<table class="tb_6">	
+		<!-- Start-->
+			<tr>
+				<th>访问时间:</th>	
+					<!--日期型-->
+					<td>
+					<input type="text" id="startDate" name="startDate" 
+					 
+					style="width:150px;" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="readonly" value="${((fwlog.startDate)?string('yyyy-MM-dd'))!'' }" />
+					</td>
+			</tr>
+			<tr>
+				<th>访问时间(毫秒):</th>	
+					<!-- 字符型 -->
+					<td>
+					<input type="text" id="strDate" name="strDate" value="${(fwlog.strDate)!''}" maxlength="100"  />
+					</td>	
+			</tr>
+			<tr>
+				<th>Tomcat:</th>	
+					<!-- 字符型 -->
+					<td>
+					<input type="text" id="tomcat" name="tomcat" value="${(fwlog.tomcat)!''}" maxlength="50"  />
+					</td>	
+			</tr>
+			<tr>
+				<th>登陆账号:</th>	
+					<!-- 字符型 -->
+					<td>
+					<input type="text" id="userCode" name="userCode" value="${(fwlog.userCode)!''}" maxlength="300"  />
+					</td>	
+			</tr>
+			<tr>
+				<th>姓名:</th>	
+					<!-- 字符型 -->
+					<td>
+					<input type="text" id="userName" name="userName" value="${(fwlog.userName)!''}" maxlength="200"  />
+					</td>	
+			</tr>
+			<tr>
+				<th>sessionId:</th>	
+					<!-- 字符型 -->
+					<td>
+					<input type="text" id="sessionId" name="sessionId" value="${(fwlog.sessionId)!''}" maxlength="300"  />
+					</td>	
+			</tr>
+			<tr>
+				<th>IP:</th>	
+					<!-- 字符型 -->
+					<td>
+					<input type="text" id="ip" name="ip" value="${(fwlog.ip)!''}" maxlength="200"  />
+					</td>	
+			</tr>
+			<tr>
+				<th>访问菜单:</th>	
+					<!-- 字符型 -->
+					<td>
+					<input type="text" id="fwUrl" name="fwUrl" value="${(fwlog.fwUrl)!''}" maxlength="3000"  />
+					</td>	
+			</tr>
+			<tr>
+				<th>菜单名称:</th>	
+					<!-- 字符型 -->
+					<td>
+					<input type="text" id="menuName" name="menuName" value="${(fwlog.menuName)!''}" maxlength="100"  />
+					</td>	
+			</tr>
+			<tr>
+				<th>是否有权限访问:</th>	
+					<!-- 字符型 -->
+					<td>
+					<input type="text" id="isqx" name="isqx" value="${(fwlog.isqx)!''}" maxlength="2"  />
+					</td>	
+			</tr>
+	</table>
+	<input type="button" onclick="submitUpdateForm();" class="btn_7"/>
+</form>

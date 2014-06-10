@@ -1,0 +1,40 @@
+
+<@h.easyui />
+
+
+<input type="hidden" name="commTabId" id="commTabId" value="${commTabId!''}"  />
+<!--input  hidden  Start-->
+	<input type="hidden" id="id" name="id" value="${(dicData.id)!''}"/>	
+<!--input  hidden  End-->
+	<table class="tb_6">	
+		<!-- Start-->
+			<tr>
+				<th>名称:</th>	
+					<!-- 字符型 -->
+					<td>
+					${(dicData.name)!''} 
+					</td>	
+			</tr>
+			<tr>
+				<th>编码:</th>	
+					<!-- 字符型 -->
+					<td>
+					${(dicData.code)!''} 
+					</td>	
+			</tr>
+			<tr>
+				<th>描述:</th>	
+					<!-- 字符型 -->
+					<td>
+					${(dicData.description)!''} 
+					</td>	
+			</tr>
+			<tr>
+				<th>是否有效:</th>	
+					<!-- 字符型 -->
+					<td>
+					${(dicData.state)!''} 
+					</td>	
+			</tr>
+			
+	</table>

@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>系统登录</title>
+<link rel="stylesheet" type="text/css" href="${ctx}/css/login.css" />
+<!--[if lte IE 8]>
+<style ty="text/css">
+.inputText {padding:6px;border:none 0;background:url(images/sprites.png) no-repeat;}
+.formVCode .inputText {padding:1px 5px;background:url(images/validateCode.png) no-repeat;}
+</style>
+<![endif]-->
+<script type="text/javascript">
+    function reloadValidateCode() {
+        document.getElementById("captchaImg").src="${ctx}/getCaptcha?date =" + new Date().getTime();
+        //$("#captchaImg").attr("src","${ctx}/getCaptcha?date = " + new Date() + Math.floor(Math.random()*24));
+    }
+</script>
+</head>
+<body   >
+	<div class="box">
+		<div class="head">
+			<h1 class="logo">
+				<span></span>
+			</h1>
+			<h2></h2>
+		</div>
+		<div class="main">
+			<div class="login">
+				<div class="boxHD">
+					<h2>用户登录</h2>
+				</div>
+				<div class="boxBD">
+					<form action="login" method="post"  id="loginForm" name="loginForm" >
+						<fieldset>
+							<ul>
+								<li class="formUser"><label><b>用户名</b> <input
+										type="text" name="account" class="inputText" id="account"  value="admin" />
+								</label></li>
+								<li class="formPW">
+								    <label><b>密码</b> 
+								    <input type="password" name="password" class="inputText" id="password" value="admin" /> 
+								    </label>
+								</li>
+								<li class="formVCode">
+								    <label><b>验证码</b> 
+								     <input type="text" name="captcha" id="captcha" value="" class="inputText" />
+								      <img id="captchaImg" src="${ctx}/getCaptcha" width="50px" height="20px" style="border: 1px solid #898989; width: 55px; height: 25px; vertical-align: middle;"  /> 
+									  <input type="hidden" id="ValidateCodeNum" value="" /> 
+									  <span class="refresh">
+									   <a style="cursor: pointer" href="javascript:reloadValidateCode();">刷新</a>
+									  </span>
+									 </label></li>
+								<li><label> <input type="checkbox"  name="rememberme"  value="true"  id="rememberme"  class="check" />&nbsp;记住我&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">${message!''}</span>
+								</label></li>
+							</ul>
+							<p class="btnWrap">
+								<label> <input type="submit" class="btnLogin"  value="登录" />
+								</label>
+							</p>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+			<div class="info">
+				<div class="phone">13530222908</div>
+				<div class="email">邮箱：<a href="mailto:morle_tang@hotmail.com"></a></div>
+			</div>
+			<div class="system">
+				<div class="boxHD">
+					<h2>请使用IE8+或者谷歌等浏览器效果更佳</h2>
+				</div>
+			</div>
+		</div>
+	   </div>
+		<div class="foot">
+			<p class="copyright">@2014 morly.org Corporation.版权所有</p>
+		</div>
+</body>
+</html>

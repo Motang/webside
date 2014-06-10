@@ -1,0 +1,25 @@
+
+<@h.easyui />
+
+
+<input type="hidden" name="commTabId" id="commTabId" value="${commTabId!''}"  />
+<!--input  hidden  Start-->
+	<input type="hidden" id="id" name="id" value="${(userRole.id)!''}"/>	
+<!--input  hidden  End-->
+	<table class="tb_6">	
+		<!-- Start-->
+			<tr>
+				<th><span >*</span>用户编号:</th>	
+					<!-- 字符型 -->
+					<td>
+					${(userRole.userId)!''} 
+					</td>	
+			</tr>
+			<tr>
+				<th><span >*</span>角色编号:</th>	
+					<!-- 字符型 -->
+					<td>
+					${(userRole.roleId)!''} 
+					</td>	
+			</tr>
+	</table>

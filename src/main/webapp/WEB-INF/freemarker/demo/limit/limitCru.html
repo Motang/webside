@@ -1,0 +1,173 @@
+
+<@h.easyui />
+<script type="text/javascript" src="${ctx}/js/zTree/js/jquery.ztree.core-3.5.min.js"></script>
+<link type="text/css" rel="stylesheet" href="${ctx}/js/zTree/css/zTreeStyle/zTreeStyle.css" />
+<script type="text/javascript" src="${ctx}/js/zTree/js/jquery.ztree.excheck-3.5.min.js"></script>  
+
+
+<script type="text/javascript">
+
+//ztree
+var setting = {  
+ async: {enable: true,type:'post',url:"${ctx}/limit/ajax/menu_json",dataFilter: ajaxDataFilter},     
+ data: {simpleData: {enable: true,idKey: "id",pIdKey: "pid",rootPId: 0},key:{name:'text'}},                      
+ callback: {       
+  onClick: zTreeOnClick,
+  onAsyncSuccess:zTreeOnAsyncSuccess
+ },
+ check:{
+	 chkStyle:"checkbox",
+	 enable:true
+ }
+};  
+function ajaxDataFilter(treeId, parentNode, responseData) {
+    if (responseData.length==0) {
+    	var add={"id":"-1","text":"<<没有权限树加载权限或数据为空>>","pid":"0","attributes":{"url":""}};
+    	responseData.insert_first(add);
+    }
+    return responseData;
+};
+function zTreeOnClick(event, treeId, treeNode) {
+	var id=treeNode.id;
+	var url=treeNode.attributes.url;
+	var name=treeNode.text;
+	if(treeNode.pid==0){
+		return false;
+	}
+	//qxTabAdd("tab_"+id,"iframe_"+id,name,ctx+url,true);
+};
+function zTreeOnAsyncSuccess(event, treeId, treeNode, msg) {
+	//展开全部
+	var treeObj = $.fn.zTree.getZTreeObj("menuTree");
+	treeObj.expandAll(true);
+	giveDate();
+	/*
+	//展开第一个
+	var treeObj = $.fn.zTree.getZTreeObj("menuTree");
+	var nodes = treeObj.getNodes();
+	if (nodes.length>0) {
+		treeObj.expandNode(nodes[0], true, true, true);
+	}*/
+};
+//end
+
+
+jQuery(document).ready(function(){
+	//多行分色
+	jQuery('.hyy').find("tr:odd").css("background","#F1F1F1");
+	//全选，取消
+	$("#checkAll").click(function(){ 
+		var selectVal=$(this).attr("checked");
+		var treeObj = $.fn.zTree.getZTreeObj("menuTree");
+        if(selectVal){
+        	treeObj.checkAllNodes(true);
+        }else{
+        	treeObj.checkAllNodes(false);
+        }
+    }); 
+	//ztree
+	 $.fn.zTree.init($("#menuTree"), setting);  
+	
+});
+
+function giveDate(){
+	 //
+	 <#if roleMenus??>
+		var roleMenuIds=new Array();
+		<#list roleMenus as menu>
+			roleMenuIds.push("${menu.menuId}");
+		</#list>
+	</#if>
+	if(roleMenuIds){
+		var treeObj = jQuery.fn.zTree.getZTreeObj("menuTree");
+		var nodes = treeObj.getNodes();
+		for(var i=0;i<nodes.length;i++){
+			getAllChildrenNodes(nodes[i],treeObj,roleMenuIds);
+		}
+	}
+ }
+function submitLimtForm(){
+	var treeObj = $.fn.zTree.getZTreeObj("menuTree");
+	var nodes = treeObj.getCheckedNodes(true);
+	var menusId=new Array();
+	for(var i=0;i<nodes.length;i++){
+		menusId.push(nodes[i].id);
+	}
+	jQuery('#roleMenuIds').val(menusId);
+	jQuery('#updateForm').submit();
+}
+///
+function getAllChildrenNodes(treeNode,_o,roleMenuIds){  
+      if (treeNode.isParent) {  
+        var childrenNodes = treeNode.children;  
+        if (childrenNodes){
+            for (var i = 0; i < childrenNodes.length; i++) {
+            	if(roleMenuIds.in_array(childrenNodes[i].id)){
+            		_o.checkNode(childrenNodes[i], true, true);
+            		getAllChildrenNodes(childrenNodes[i],_o,roleMenuIds);
+            	}else{
+            		_o.checkNode(childrenNodes[i], false, false);
+            		getAllChildrenNodes(childrenNodes[i],_o,roleMenuIds);
+            	}
+            }  
+        }
+    }  
+}  
+//
+//判断Array中是否含有某个元素
+Array.prototype.in_array = function(e){  
+for(i=0;i<this.length && this[i]!=e;i++);  
+	return !(i==this.length);
+}  
+//在数组元素的最前面加一个数据
+Array.prototype.insert_first = function(e){  
+	for(i=this.length;i>0;i--){
+		this[i]=this[i-1];
+	}
+	this[0]=e;
+}  
+</script>
+<form id="updateForm" name="updateForm"  method="post" action="${ctx}/limit/update" >
+<input type="hidden" name="commTabId" id="commTabId" value="${commTabId!''}"  />
+<!--input  hidden  Start-->
+	<input type="hidden" id="id" name="id" value="${(menu.id)!''}"/>
+	<input type="hidden" id="roleMenuIds" name="roleMenuIds"/>	
+<!--input  hidden  End-->
+	<table class="tb_6" >	
+		<!-- Start-->
+			<tr>
+				<th>角色名:</th>	
+					<!-- 字符型 -->
+					<td>
+						${role.name!''}
+						<input type="hidden" name="roleId" value="${role.id!''}">
+					</td>	
+			</tr>
+			<tr>
+				<th>菜单:</th>	
+					<!-- 字符型 -->
+					<td>
+						<table class="hyy" cellpadding="0px" cellspacing="0">
+							<tr><th><input type="checkbox" id="checkAll"/>全选</th></tr>
+							<td><ul id="menuTree" class="ztree"></ul></td>
+							<!--  
+							<#if menus??>
+								<#list menus as menu>
+									<tr><td><input type="checkbox" name="menus" value="${menu.id!''}"/></td><td>${menu.name!''}</td><td>${menu.pageurl!''}</td>
+									<#if menu.type==0>
+									<td style='color:green'>
+										普通资源
+									<#else>
+									<td>
+										菜单资源
+									</#if>
+									</td></tr>
+								</#list>
+							</#if>
+							-->
+						</table>
+					</td>	
+			</tr>
+	</table>
+	<input type="button" onclick="submitLimtForm()" class="btn_7"/>
+</form>

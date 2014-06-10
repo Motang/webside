@@ -1,0 +1,129 @@
+
+<@h.easyui />
+<script type="text/javascript" src="${ctx}/js/plugins/jquery.checkbox.js"></script>
+<script type="text/javascript" src="${ctx}/js/demo/menu/menu.js"></script>
+</head>
+
+<script type="text/javascript">
+<!--
+jQuery(document).ready(function(){
+     //初始化 排序图标
+    initSortTable("listDataTable","searchForm");
+	//添加颜色改变
+	mouseTrColor("listDataTable");
+	
+});
+//-->
+</script>
+
+<body>
+<!-- 操作菜单 -->
+	<div class="head">
+		<div class="path">Menu &gt; Menu</div>
+	</div>
+	<div class="contents">
+<!-- 查询 -->
+<form name="searchForm" id="searchForm" method="post" action="${ctx}/menu/list" >
+<input type="hidden" name="pageIndex" id="pageIndex" value="${(page.pageIndex)!'1'}" />
+<input type="hidden" name="commTabId" id="commTabId" value="${commTabId!''}"  />
+<input type="hidden" name="sort" id="page_sort" value="${(page.sort)!'desc'}"  />
+<input type="hidden" name="order" id="page_order" value="${(page.order)!'id'}"  />
+		<table class="tb_2">
+			<tr>
+	         <td>菜单名称:<input type="text" id="name" name="name"  class="inp_2" /></td>
+	         <td>菜单类别:
+	         	<select name="type" id="type"  class="inp_2">
+						<option value="0">普通资源</option>
+						<option value="1">菜单资源</option>
+					</select>
+	         <td>是否有效:<select class="inp_2"  id="state" name="state"><option value="">==请选择==</option><option value="是">是</option><option value="否">否</option></select></td>
+				<td>
+					<input type="button" onclick="submitForm('searchForm');"  value="搜 索" class="btn_search"  />  
+				</td>
+			</tr>
+		</table>
+		</form>
+		
+<!-- 数据列表 -->
+		<dl class="box_1">
+			<dt>
+				<div>数据</div>
+				<a class="a_1" href="javascript:export_excel('searchForm');">导出</a><div class="img_2" ></div>
+				<a class="a_3" href="javascript:f_newTab('add_menu','add_menu','添加菜单','${ctx}/menu/update/pre');">添加</a><div class="img_2" ></div>
+				<a class="a_0" href="javascript:delMulti();">删除选中</a><div class="img_2"></div>
+			</dt>
+			<dd>
+			
+			
+			<!--start_export-->
+				<table  id="listDataTable" border="1" class="tb_2">
+			<!--end_no_export-->
+			<!--first_start_export-->
+					<tr id="table_first_tr"  bgcolor="#F1F1F1" >
+					<!--first_start_no_export-->
+						<th><input type="checkbox" name="check_all" id="check_all"/></th>
+						<th width="100px;">操作</th>
+					<!--first_end_no_export-->
+						<th id="th_name" >菜单名称</th>
+						<th id="th_pid" >父类菜单</th>
+						<th id="th_description" >描述</th>
+						<th id="th_pageurl" >菜单地址</th>
+						<th id="th_type" >菜单类别</th>
+						<th id="th_state" >是否有效</th>
+						
+					</tr>
+				<!--first_end_export-->
+				
+				<!--start_export-->
+				   <#if datas??&&((datas?size)>0)>
+					<#list datas as data>
+						<tr>
+				<!--start_no_export-->
+						<#if (datas?size > 0)>
+							<td align="center">
+								<input type="checkbox" name="check_li" value="${data.id}" />
+							</td>
+						</#if>
+						
+						<td style="text-align:center;">
+								<a href="javascript:f_newTab('${data.id}_update','${data.id}_update','${data.id}_修改菜单','${ctx}/menu/update/pre?id=${data.id}');">修改</a>
+								  /  <a href="javascript:delMenu('${data.id}');">删除</a>/<a href="javascript:f_newTab('${data.id}_look','${data.id}_look','${data.id}_look','${ctx}/menu/look?id=${data.id}');">查看</a>
+						</td>
+				<!--end_no_export-->
+						
+							<td >
+								${(data.name)!''}
+							</td>
+							<td >
+								${(data.pid)!''}
+							</td>
+							<td >
+								${(data.description)!''}
+							</td>
+							<td >
+								${(data.pageurl)!''}
+							</td>
+							<td >
+							<#if data.type==0>普通资源
+							<#else>
+							菜单资源
+							</#if>
+							</td>
+							<td >
+								${data.state!''}
+							</td>
+							
+						</tr>
+					</#list>
+					 </#if>
+				</table>
+			 <!--end_export-->
+			</dd>
+<#if page??>		
+<!-- 分页 -->
+	  <@h.pagetoolbar page=page formName='searchForm'/>
+</#if>
+		</dl>
+	</div>
+</body>
+</html>

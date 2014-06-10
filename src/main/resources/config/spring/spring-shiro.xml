@@ -36,10 +36,11 @@
 
     <!-- sessionIdCookie的实现,用于重写覆盖容器默认的JSESSIONID -->
     <bean id="sharesession" class="org.apache.shiro.web.servlet.SimpleCookie">
-        <!-- cookie的name,对应的默认是 JSESSIONID -->
-        <constructor-arg name="name" value="SHAREJSESSIONID" />
-        <!-- jsessionId的path为 / 用于多个系统共享jsessionId -->
-        <property name="path" value="/" />
+        <constructor-arg value="${shiro.uid.cookie.name}"/>
+        <property name="domain" value="${shiro.uid.cookie.domain}"/>
+        <property name="path" value="${shiro.uid.cookie.path}"/>
+        <property name="httpOnly" value="${shiro.uid.cookie.httpOnly}"/>
+        <property name="maxAge" value="${shiro.uid.cookie.maxAge}"/>
     </bean>
     <!-- session存储的实现 -->
     <bean id="shiroSessionDao"
@@ -53,19 +54,48 @@
     <bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
         <!-- rememberme cookie加密的密钥 建议每个项目都不一样 默认AES算法 密钥长度（128 256 512 位）-->
         <property name="cipherKey"
-                  value="#{T(org.apache.shiro.codec.Base64).decode('4AvVhmFLUs0KTA3Kprsdag==')}"/>
+                  value="#{T(org.apache.shiro.codec.Base64).decode('${shiro.uid.rememeberMe.cookie.base64.cipherKey}')}"/>
         <property name="cookie" ref="rememberMeCookie"/>
     </bean>
     <bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
-        <constructor-arg value="rememberMe"/>
-        <property name="domain" value="localhost"/>
-        <property name="path" value="/"/>
-        <property name="httpOnly" value="true"/>
-        <property name="maxAge" value="1"/>
+        <constructor-arg value="${shiro.uid.rememeberMe.cookie.name}"/>
+        <property name="domain" value="${shiro.uid.cookie.domain}"/>
+        <property name="path" value="${shiro.uid.cookie.path}"/>
+        <property name="httpOnly" value="${shiro.uid.cookie.httpOnly}"/>
+        <property name="maxAge" value="${shiro.uid.rememeberMe.cookie.maxAge}"/>
     </bean>
     
+    <!-- filter -->
+    <!--替换默认的form 验证过滤器-->
+    <bean id="formAuthenticationFilter" class="com.motang.framework.shiro.filter.CustomFormAuthenticationFilter">
+        <property name="defaultSuccessUrl" value="${shiro.default.success.url}"/>
+        <property name="adminDefaultSuccessUrl" value="${shiro.admin.default.success.url}"/>
+        <!--表单上的用户名/密码 下次自动登录的参数名-->
+        <property name="usernameParam" value="username"/>
+        <property name="passwordParam" value="password"/>
+        <property name="rememberMeParam" value="rememberMe"/>
+    </bean>
+
+    <!-- 退出登录过滤器 -->
+    <bean id="logoutFilter" class="org.apache.shiro.web.filter.authc.LogoutFilter">
+        <property name="redirectUrl" value="${shiro.logout.success.url}"/>
+    </bean>
     <!--提取系统用户（User） 验证用户是否合法的过滤器（如是否删除了 是否锁定了） -->
-    <bean id="sysUserFilter" class="org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter">
+    <!-- <bean id="sysUserFilter" class="org.apache.shiro.web.filter.user.SysUserFilter">
+        <property name="userBlockedUrl" value="${shiro.user.blocked.url}"/>
+        <property name="userNotfoundUrl" value="${shiro.user.notfound.url}"/>
+        <property name="userUnknownErrorUrl" value="${shiro.user.unknown.error.url}"/>
+    </bean> -->
+    <!-- 验证会话是否是强制退出等的filter -->
+    <!-- <bean id="onlineSessionFilter" class="org.apache.shiro.web.filter.online.OnlineSessionFilter">
+        <property name="forceLogoutUrl" value="/login?forcelogout=1"/>
+        <property name="onlineSessionDAO" ref="onlineSessionDAO"/>
+    </bean> -->
+
+    <bean id="jCaptchaValidateFilter" class="com.motang.framework.shiro.filter.JCaptchaValidateFilter">
+        <property name="jcaptchaEbabled" value="${shiro.jcaptcha.enable}"/>
+        <property name="jcaptchaParam" value="jcaptchaCode"/>
+        <property name="jcapatchaErrorUrl" value="${shiro.jcaptcha.error.url}"/>
     </bean>
 	
     <!-- shiro的主过滤器,beanId 和web.xml中配置的filter name需要保持一致 -->
@@ -73,33 +103,45 @@
         <!-- 安全管理器 -->
         <property name="securityManager" ref="securityManager" />
         <!-- 默认的登陆访问url -->
-        <property name="loginUrl" value="/html/admin/login.html" />
+        <property name="loginUrl" value="/login" />
         <!-- 登陆成功后跳转的url -->
-        <property name="successUrl" value="/html/admin/index.html" />
+        <property name="successUrl" value="/index" />
         <!-- 没有权限跳转的url -->
         <property name="unauthorizedUrl" value="/unauth" />
         <!-- 访问地址的过滤规则,从上至下的优先级,如果有匹配的规则,就会返回,不会再进行匹配 -->
         <property name="filterChainDefinitions">
             <value>
-                /html/** = anon
-                /static/** = anon
+                /js/** = anon
+                /css/** = anon
+                /images/** = anon
                 /favicon.ico = anon
                 /unauth = anon
-                /getCaptcha=anon
-                /login = anon
+                /getCaptcha = anon
+                /login = jCaptchaValidate,formAuthc
                 /logout = logout
-                /**/ajax/** = authc
-                /** = authc
+                /user/index = user
+                /menu/leftMenu=user
+                /**/ajax/** = user
+                /** = user
             </value>
         </property>
         <!-- 声明自定义的过滤器 -->
-        <!-- <property name="filters">
+        <property name="filters">
             <map>
-                <entry key="user" value-ref="sysUserFilter"></entry>
+                <entry key="formAuthc" value-ref="formAuthenticationFilter"/>
+                <entry key="jCaptchaValidate" value-ref="jCaptchaValidateFilter"/>
+                <entry key="logout" value-ref="jCaptchaValidateFilter"/>
             </map>
-        </property> -->
+        </property>
     </bean>
     <!-- 起效权限注解,这个很少在web项目中用到,一般是控制url的访问,不是在controller中声明权限注解 -->
-    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />	
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+    
+    <!-- Enable Shiro Annotations for Spring-configured beans.  Only run after -->
+	<!-- the lifecycleBeanProcessor has run: -->
+	<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+	    <property name="staticMethod" value="org.apache.shiro.SecurityUtils.setSecurityManager"/>
+	    <property name="arguments" ref="securityManager"/>
+	</bean>	
 </beans>
 
