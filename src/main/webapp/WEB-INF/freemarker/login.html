@@ -52,7 +52,7 @@
 							<ul>
 								<li class="formUser">
 								    <label><b>用户名</b>
-								    <input type="text" name="username" class="inputText" id="username" />
+								    <input type="text" name="username" class="inputText" id="username" value="${username!''}"/>
 								</label></li>
 								<li class="formPW">
 								    <label><b>密码</b> 
@@ -68,7 +68,10 @@
 									   <a style="cursor: pointer" href="javascript:reloadValidateCode();">刷新</a>
 									  </span>
 									 </label></li>
-								<li><label> <input type="checkbox"  name="rememberme"  value="true"  id="rememberme"  class="check" />&nbsp;记住我&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">${message!''}</span>
+								<li><label> 
+								[#if rememberMe??]
+								<input type="checkbox"  name="rememberMe"  value="true"  id="rememberMe"  class="check" />
+								&nbsp;记住我&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">${message!(error!'')}</span>
 								</label></li>
 							</ul>
 							<p class="btnWrap">
@@ -83,9 +86,6 @@
 			    [#if shiroLoginFailure??]
 				<div>错误：${shiroLoginFailure}</div>
 				[/#if]
-				[#if error??]
-                <div>错误：${error}</div>
-                [/#if]
 				<div class="phone">电话：13530222908</div>
 				<div class="email">邮箱：<a href="mailto:morle_tang@hotmail.com">morle_tang@hotmail.com</a></div>
 			</div>
