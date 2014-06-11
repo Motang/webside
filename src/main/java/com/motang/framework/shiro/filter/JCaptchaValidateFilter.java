@@ -14,6 +14,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.apache.shiro.web.util.WebUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.motang.framework.util.CaptchaUtils;
 import com.motang.framework.util.GlobalStatic;
@@ -25,6 +27,8 @@ import com.motang.framework.util.GlobalStatic;
  * <p>Version: 1.0
  */
 public class JCaptchaValidateFilter extends AccessControlFilter {
+	
+	private Logger logger = LoggerFactory.getLogger(getClass());
 
     private boolean jcaptchaEbabled = true;
 
@@ -66,24 +70,32 @@ public class JCaptchaValidateFilter extends AccessControlFilter {
 
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
-        HttpServletRequest httpServletRequest = (HttpServletRequest) request;
-        //验证码禁用 或不是表单提交 允许访问
+    	HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+    	logger.info("JCaptchaValidateFilter jcaptchaEbabled={}, method={}", jcaptchaEbabled, httpServletRequest.getMethod());
+    	//验证码禁用 或不是表单提交 允许访问
         if (jcaptchaEbabled == false || !"post".equals(httpServletRequest.getMethod().toLowerCase())) {
             return true;
         }
         
-        HttpSession session = httpServletRequest.getSession();
-        
-		String code = (String) session.getAttribute(jcaptchaParam);
-		String submitCode = WebUtils.getCleanParam(request, jcaptchaParam);
-		
-        return CaptchaUtils.validateResponse(code, submitCode);
+    	return false;
     }
 
 
     @Override
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
-        redirectToLogin(request, response);
+    	HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+    	HttpSession session = httpServletRequest.getSession();
+        
+    	logger.info("JCaptchaValidateFilter invoke onAccessDenied<<<<>>");
+        
+		String code = (String) session.getAttribute(GlobalStatic.DEFAULT_CAPTCHA_PARAM);
+		String submitCode = WebUtils.getCleanParam(request, jcaptchaParam);
+		
+        if (!CaptchaUtils.validateResponse(code, submitCode)) {
+        	redirectToLogin(request, response);
+        	return false;
+        }
+        
         return true;
     }
 

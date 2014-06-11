@@ -6,12 +6,14 @@
 package com.motang.framework.shiro.filter;
 
 import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
-import org.apache.shiro.web.util.WebUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 基于几点修改：
@@ -26,7 +28,7 @@ import org.apache.shiro.web.util.WebUtils;
  * <p>Version: 1.0
  */
 public class CustomFormAuthenticationFilter extends FormAuthenticationFilter {
-
+	private Logger logger = LoggerFactory.getLogger(getClass());
 
     /**
      * 默认的成功地址
@@ -57,10 +59,16 @@ public class CustomFormAuthenticationFilter extends FormAuthenticationFilter {
     	request.setAttribute(getFailureKeyAttribute(), ae);
     }
     
-    protected boolean isRememberMe(ServletRequest request) {
-        return WebUtils.isTrue(request, getRememberMeParam());
+    protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
+    	logger.info("CustomFormAuthenticationFilter invoke isAccessAllowed...");
+    	return super.isAccessAllowed(request, response, mappedValue);
     }
-
+    
+    protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception{
+    	logger.info("CustomFormAuthenticationFilter invoke onAccessDenied<<<");
+    	return super.onAccessDenied(request, response);
+    }
+    
     /**
      * 根据用户选择成功地址
      *

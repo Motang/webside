@@ -230,7 +230,6 @@ public class LoginController extends BaseController {
 		CaptchaUtils tool = new CaptchaUtils();
 		StringBuffer code = new StringBuffer();
 		BufferedImage image = tool.genRandomCodeImage(code);
-		session.removeAttribute(GlobalStatic.DEFAULT_CAPTCHA_PARAM);
 		session.setAttribute(GlobalStatic.DEFAULT_CAPTCHA_PARAM, code.toString());
 
 		// 将内存中的图片通过流动形式输出到客户端

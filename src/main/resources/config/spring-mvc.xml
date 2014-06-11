@@ -162,6 +162,7 @@
             <list>
                 <!-- 在web环境中一定要定位到classpath 否则默认到当前web应用下找  -->
                 <value>classpath:config/validation/valid</value>
+                <value>classpath:config/validation/messages</value>
             </list>
         </property>
         <property name="useCodeAsDefaultMessage" value="false"/>

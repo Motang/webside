@@ -15,6 +15,22 @@
         document.getElementById("captchaImg").src="${ctx}/getCaptcha?date =" + new Date().getTime();
         //$("#captchaImg").attr("src","${ctx}/getCaptcha?date = " + new Date() + Math.floor(Math.random()*24));
     }
+    function submitLoginForm() {
+    	var username=document.getElementById("username").value;
+    	var password=document.getElementById("password").value;
+    	if (username=="" || password=="") {
+    		alert("用户名和密码不能为空！");
+    		return;
+    	}
+    	
+    	var jcaptchaCode=document.getElementById("jcaptchaCode").value;
+    	if (jcaptchaCode=="") {
+    		alert("验证码不能为空！");
+    		return;
+    	}
+    	
+    	document.getElementById("loginForm").submit();
+    }
 </script>
 </head>
 <body   >
@@ -34,17 +50,18 @@
 					<form action="login" method="post"  id="loginForm" name="loginForm" >
 						<fieldset>
 							<ul>
-								<li class="formUser"><label><b>用户名</b> <input
-										type="text" name="account" class="inputText" id="account"  value="admin" />
+								<li class="formUser">
+								    <label><b>用户名</b>
+								    <input type="text" name="username" class="inputText" id="username" />
 								</label></li>
 								<li class="formPW">
 								    <label><b>密码</b> 
-								    <input type="password" name="password" class="inputText" id="password" value="admin" /> 
+								    <input type="password" name="password" class="inputText" id="password" /> 
 								    </label>
 								</li>
 								<li class="formVCode">
 								    <label><b>验证码</b> 
-								     <input type="text" name="captcha" id="captcha" value="" class="inputText" />
+								     <input type="text" name="jcaptchaCode" id="jcaptchaCode" value="" class="inputText" />
 								      <img id="captchaImg" src="${ctx}/getCaptcha" width="50px" height="20px" style="border: 1px solid #898989; width: 55px; height: 25px; vertical-align: middle;"  /> 
 									  <input type="hidden" id="ValidateCodeNum" value="" /> 
 									  <span class="refresh">
@@ -55,7 +72,7 @@
 								</label></li>
 							</ul>
 							<p class="btnWrap">
-								<label> <input type="submit" class="btnLogin"  value="登录" />
+								<label> <input type="button" class="btnLogin" onclick="javascript:return submitLoginForm()"  value="登录" />
 								</label>
 							</p>
 						</fieldset>
@@ -63,8 +80,14 @@
 				</div>
 			</div>
 			<div class="info">
-				<div class="phone">13530222908</div>
-				<div class="email">邮箱：<a href="mailto:morle_tang@hotmail.com"></a></div>
+			    [#if shiroLoginFailure??]
+				<div>错误：${shiroLoginFailure}</div>
+				[/#if]
+				[#if error??]
+                <div>错误：${error}</div>
+                [/#if]
+				<div class="phone">电话：13530222908</div>
+				<div class="email">邮箱：<a href="mailto:morle_tang@hotmail.com">morle_tang@hotmail.com</a></div>
 			</div>
 			<div class="system">
 				<div class="boxHD">

@@ -130,7 +130,7 @@
             <map>
                 <entry key="formAuthc" value-ref="formAuthenticationFilter"/>
                 <entry key="jCaptchaValidate" value-ref="jCaptchaValidateFilter"/>
-                <entry key="logout" value-ref="jCaptchaValidateFilter"/>
+                <entry key="logout" value-ref="logoutFilter"/>
             </map>
         </property>
     </bean>

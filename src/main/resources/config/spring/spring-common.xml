@@ -11,14 +11,16 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
 	<!-- 加载*.properties File -->
-	<!-- <bean id="dbConfPostProcessor"
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="locations">
-			<list>
-				<value>classpath:config/db/db.properties</value>
-			</list>
-		</property>
-	</bean> -->
+	<bean id="propertyConfigurer"
+        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <property name="locations">
+            <list>
+                <value>classpath:resources.properties</value>
+                <value>classpath:config/db/db.properties</value>
+            </list>
+        </property>
+     </bean>
 	<!-- 扫描的包路径 去掉mvc的注解 -->
 	<!-- <context:component-scan base-package="org.springrain">
 		<context:exclude-filter type="annotation"
