@@ -2,6 +2,8 @@ package com.motang.webside.web;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
@@ -110,6 +112,11 @@ public class LoginController extends BaseController {
 	        if (model.containsAttribute(GlobalStatic.ERROR)) {
 	            model.remove(GlobalStatic.MESSAGE);
 	        }
+	        
+	        Set<Entry<String, Object>> entrySet = model.entrySet();
+	        for (Entry<String, Object> entry : entrySet) {
+				System.out.printf("<<<<=======key=%s, value=%s \n",entry.getKey(), entry.getValue());
+			}
 
 	        return "login";
 	    }
