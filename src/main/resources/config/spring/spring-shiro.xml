@@ -14,18 +14,18 @@
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <!-- 数据库认证的实现 org.springrain.frame.shiro.ShiroDbRealm -->
         <property name="realm" ref="shiroDbRealm" />
-        <!-- 缓存管理器 -->
-        <property name="cacheManager" ref="shiroCacheManager" />
         <!-- session 管理器 -->
         <property name="sessionManager" ref="sessionManager" />
         <!-- cookie管理器 -->
         <property name="rememberMeManager" ref="rememberMeManager"/>
+        <!-- 缓存管理器 -->
+        <property name="cacheManager" ref="shiroCacheManager" />
     </bean>
     <!-- session管理器 -->
     <bean id="sessionManager"
         class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
         <!-- 超时时间 -->
-        <property name="globalSessionTimeout" value="1800000" />
+        <property name="globalSessionTimeout" value="${shiro.session.globalSessionTimeout}" />
         <!-- session存储的实现 -->
         <property name="sessionDAO" ref="shiroSessionDao" />
         <!-- sessionIdCookie的实现,用于重写覆盖容器默认的JSESSIONID -->
