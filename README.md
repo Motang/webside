@@ -26,12 +26,14 @@ Simple website with SpringMVC + Mybatis + Shiro + Druid + Ehcache
 
 
 ## Introduction
-1. Guide to web.xml
+Here introduces some very important configuration files to integrate SpringMVC、MyBatis、Shiro、Ehcache(such as web.xml, Spring configuration, SpringMVC configuration)
 
-2. Guide to Spring configuration files: spring-config.xml
-# spring-dao.xml
-# spring-common.xml
-# spring-shiro.xml
+### Guide to web.xml
 
-3. Guide to Spring MVC configuration file: spring-mvc.xml
-# spring-mvc.xml
+### Guide to Spring configuration files: spring-config.xml
+ spring-dao.xml
+ spring-common.xml
+ spring-shiro.xml
+
+### Guide to Spring MVC configuration file: spring-mvc.xml
+ spring-mvc.xml
