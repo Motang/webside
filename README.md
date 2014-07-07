@@ -13,10 +13,16 @@ Simple website with SpringMVC + Mybatis + Shiro + Druid + Ehcache
 ## User Guide
 
 1. generate a Eclipse project with the following MAVEN script in CMD or SHELL window
+
   mvn eclipse:eclipse
+  
 2. run project
+
   mvn tomcat:run -Dmaven.test.skip=true
+  
 3. enter the following URL in browser with zhang/123 to login
+
   http://localhost:8080/webside/index
+
 
 ## Introduction
