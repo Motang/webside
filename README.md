@@ -16,13 +16,22 @@ Simple website with SpringMVC + Mybatis + Shiro + Druid + Ehcache
 
   mvn eclipse:eclipse
   
-2. run project
+2. run project in Tomcat
 
   mvn tomcat:run -Dmaven.test.skip=true
   
-3. enter the following URL in browser with zhang/123 to login
+3. enter the following URL in browser with username/password(zhang/123) to login
 
   http://localhost:8080/webside/index
 
 
 ## Introduction
+1. Guide to web.xml
+
+2. Guide to Spring configuration files: spring-config.xml
+# spring-dao.xml
+# spring-common.xml
+# spring-shiro.xml
+
+3. Guide to Spring MVC configuration file: spring-mvc.xml
+# spring-mvc.xml
