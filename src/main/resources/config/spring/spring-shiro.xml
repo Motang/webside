@@ -114,6 +114,7 @@
                 /js/** = anon
                 /css/** = anon
                 /images/** = anon
+                /hessian/** = anon
                 /favicon.ico = anon
                 /unauth = anon
                 /getCaptcha = anon
