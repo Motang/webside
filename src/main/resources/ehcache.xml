@@ -15,7 +15,7 @@
     memoryStoreEvictionPolicy：当达到maxElementsInMemory限制时，Ehcache将会根据指定的策略去清理内存。默认策略是LRU（最近最少使用）。你可以设置为FIFO（先进先出）或是LFU（较少使用） 
     -->
     <defaultCache overflowToDisk="true" eternal="false" maxElementsInMemory="1" diskPersistent="true" />
-    <diskStore path="D://Projects//webside//cache" />
+    <diskStore path="cache" />
     <!--
         <cache name="zzugxy" overflowToDisk="true" eternal="false"
         timeToIdleSeconds="300" timeToLiveSeconds="600" maxElementsInMemory="1000"
