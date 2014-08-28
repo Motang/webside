@@ -1,7 +1,7 @@
 webside
 ====
 
-A simple web site with SpringMVC + Mybatis + Shiro + Druid + Ehcache frameworks, it is a J2EE project named 'website', provide HTTP and Hessian interface to clients.
+A simple web site with SpringMVC + Mybatis + Shiro + Druid + Ehcache frameworks, it is a J2EE project named 'webside', provide HTTP and Hessian interface to clients.
 
 ## Preparation
 
