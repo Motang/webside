@@ -7,7 +7,7 @@ A simple web site with SpringMVC + Mybatis + Shiro + Druid + Ehcache frameworks,
 
 1. Above JDK1.6 install
 2. Above Maven 3.0.5, Private repository with Nexus is more better in Company
-3. Eclipse Java EE IDE with Git, 'Kepler' version is more better
+3. Eclipse Java EE IDE with Git and Checkstyle plugins, 'Kepler' version is more better.  
 4. MySQL install (No mandatory requirement, maybe replace with H2 or HSQLDB)
 
 ## User Guide
@@ -32,6 +32,10 @@ A simple web site with SpringMVC + Mybatis + Shiro + Druid + Ehcache frameworks,
 2. Integration Test, enter the following command
 
   mvn integration-test
+
+3. Sourcecode check, enter the following command, see the results in target/checkstyle-result.xml
+
+  mvn checkstyle:checkstyle
 
 ## Introduction
   Here introduces some very important configuration files to integrate SpringMVC、MyBatis、Shiro、Ehcache(such as web.xml, Spring configuration, SpringMVC configuration)
