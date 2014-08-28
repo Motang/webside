@@ -19,10 +19,8 @@ import org.springframework.context.MessageSource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.motang.framework.util.CaptchaUtils;
 import com.motang.framework.util.GlobalStatic;
@@ -36,7 +34,7 @@ public class LoginController extends BaseController {
 	 private MessageSource messageSource;
 	/**
 	 * 首页的映射
-	 * 
+	 *
 	 * @param model
 	 * @return
 	 * @throws Exception
@@ -56,28 +54,29 @@ public class LoginController extends BaseController {
 //
 //		return "/login";
 //	}
-	
-	  @RequestMapping(value = {"/{login:login;?.*}"}) //spring3.2.2 bug see  http://jinnianshilongnian.iteye.com/blog/1831408
+
+	    //spring3.2.2 bug see  http://jinnianshilongnian.iteye.com/blog/1831408
+	    @RequestMapping(value = {"/{login:login;?.*}"})
 	    public String loginForm(HttpServletRequest request, ModelMap model) {
 
 	        //表示退出
 	        if (!StringUtils.isEmpty(request.getParameter("logout"))) {
-	            model.addAttribute(GlobalStatic.MESSAGE, messageSource.getMessage("user.logout.success", null, null));
+	            model.addAttribute(GlobalStatic.MESSAGE, this.messageSource.getMessage("user.logout.success", null, null));
 	        }
 
 	        //表示用户删除了 @see org.apache.shiro.web.filter.user.SysUserFilter
 	        if (!StringUtils.isEmpty(request.getParameter("notfound"))) {
-	            model.addAttribute(GlobalStatic.ERROR, messageSource.getMessage("user.notfound", null, null));
+	            model.addAttribute(GlobalStatic.ERROR, this.messageSource.getMessage("user.notfound", null, null));
 	        }
 
 	        //表示用户被管理员强制退出
 	        if (!StringUtils.isEmpty(request.getParameter("forcelogout"))) {
-	            model.addAttribute(GlobalStatic.ERROR, messageSource.getMessage("user.forcelogout", null, null));
+	            model.addAttribute(GlobalStatic.ERROR, this.messageSource.getMessage("user.forcelogout", null, null));
 	        }
 
 	        //表示用户输入的验证码错误
 	        if (!StringUtils.isEmpty(request.getParameter("jcaptchaError"))) {
-	            model.addAttribute(GlobalStatic.ERROR, messageSource.getMessage("jcaptcha.validate.error", null, null));
+	            model.addAttribute(GlobalStatic.ERROR, this.messageSource.getMessage("jcaptcha.validate.error", null, null));
 	        }
 
 
@@ -85,16 +84,15 @@ public class LoginController extends BaseController {
 	        if (!StringUtils.isEmpty(request.getParameter("blocked"))) {
 	            User user = (User) request.getAttribute(GlobalStatic.CURRENT_USER);
 	            ///String reason = userStatusHistoryService.getLastReason(user);
-	            model.addAttribute(GlobalStatic.ERROR, messageSource.getMessage("user.blocked", new Object[]{"Cannot login"}, null));
+	            model.addAttribute(GlobalStatic.ERROR, this.messageSource.getMessage("user.blocked", new Object[]{"Cannot login"}, null));
 	        }
 
 	        if (!StringUtils.isEmpty(request.getParameter("unknown"))) {
-	            model.addAttribute(GlobalStatic.ERROR, messageSource.getMessage("user.unknown.error", null, null));
+	            model.addAttribute(GlobalStatic.ERROR, this.messageSource.getMessage("user.unknown.error", null, null));
 	        }
 
 	        //登录失败了 提取错误消息
-	        Exception shiroLoginFailureEx =
-	                (Exception) request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
+	        Exception shiroLoginFailureEx = (Exception) request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
 	        if (shiroLoginFailureEx != null) {
 	            model.addAttribute(GlobalStatic.ERROR, shiroLoginFailureEx.getMessage());
 	        }
@@ -112,7 +110,7 @@ public class LoginController extends BaseController {
 	        if (model.containsAttribute(GlobalStatic.ERROR)) {
 	            model.remove(GlobalStatic.MESSAGE);
 	        }
-	        
+
 	        Set<Entry<String, Object>> entrySet = model.entrySet();
 	        for (Entry<String, Object> entry : entrySet) {
 				System.out.printf("<<<<=======key=%s, value=%s \n",entry.getKey(), entry.getValue());
@@ -187,13 +185,13 @@ public class LoginController extends BaseController {
 //		return "redirect:/index";
 //	}
 
-	/**
-	 * 没有权限
-	 * 
-	 * @param model
-	 * @return
-	 * @throws Exception
-	 */
+//	/**
+//	 * 没有权限
+//	 *
+//	 * @param model
+//	 * @return
+//	 * @throws Exception
+//	 */
 //	@RequestMapping(value = "/unauth")
 //	public String unauth(Model model) throws Exception {
 //		if (SecurityUtils.getSubject().isAuthenticated() == false) {
@@ -203,11 +201,11 @@ public class LoginController extends BaseController {
 //
 //	}
 
-	/**
-	 * 退出
-	 * 
-	 * @param request
-	 */
+//	/**
+//	 * 退出
+//	 *
+//	 * @param request
+//	 */
 //	@RequestMapping(value = "/logout")
 //	public void logout(HttpServletRequest request) {
 //		Subject subject = SecurityUtils.getSubject();
@@ -224,7 +222,7 @@ public class LoginController extends BaseController {
 
 	/**
 	 * 生成验证码
-	 * 
+	 *
 	 * @return
 	 * @throws IOException
 	 */

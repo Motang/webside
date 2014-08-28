@@ -24,7 +24,7 @@ public class Account implements Serializable {
 	private String bannerName;
 
 	public String getUsername() {
-		return username;
+		return this.username;
 	}
 
 	public void setUsername(String username) {
@@ -32,7 +32,7 @@ public class Account implements Serializable {
 	}
 
 	public String getPassword() {
-		return password;
+		return this.password;
 	}
 
 	public void setPassword(String password) {
@@ -40,7 +40,7 @@ public class Account implements Serializable {
 	}
 
 	public String getEmail() {
-		return email;
+		return this.email;
 	}
 
 	public void setEmail(String email) {
@@ -48,7 +48,7 @@ public class Account implements Serializable {
 	}
 
 	public String getFirstName() {
-		return firstName;
+		return this.firstName;
 	}
 
 	public void setFirstName(String firstName) {
@@ -56,7 +56,7 @@ public class Account implements Serializable {
 	}
 
 	public String getLastName() {
-		return lastName;
+		return this.lastName;
 	}
 
 	public void setLastName(String lastName) {
@@ -64,7 +64,7 @@ public class Account implements Serializable {
 	}
 
 	public String getStatus() {
-		return status;
+		return this.status;
 	}
 
 	public void setStatus(String status) {
@@ -72,7 +72,7 @@ public class Account implements Serializable {
 	}
 
 	public String getAddress1() {
-		return address1;
+		return this.address1;
 	}
 
 	public void setAddress1(String address1) {
@@ -80,7 +80,7 @@ public class Account implements Serializable {
 	}
 
 	public String getAddress2() {
-		return address2;
+		return this.address2;
 	}
 
 	public void setAddress2(String address2) {
@@ -88,7 +88,7 @@ public class Account implements Serializable {
 	}
 
 	public String getCity() {
-		return city;
+		return this.city;
 	}
 
 	public void setCity(String city) {
@@ -96,7 +96,7 @@ public class Account implements Serializable {
 	}
 
 	public String getState() {
-		return state;
+		return this.state;
 	}
 
 	public void setState(String state) {
@@ -104,7 +104,7 @@ public class Account implements Serializable {
 	}
 
 	public String getZip() {
-		return zip;
+		return this.zip;
 	}
 
 	public void setZip(String zip) {
@@ -112,7 +112,7 @@ public class Account implements Serializable {
 	}
 
 	public String getCountry() {
-		return country;
+		return this.country;
 	}
 
 	public void setCountry(String country) {
@@ -120,7 +120,7 @@ public class Account implements Serializable {
 	}
 
 	public String getPhone() {
-		return phone;
+		return this.phone;
 	}
 
 	public void setPhone(String phone) {
@@ -128,7 +128,7 @@ public class Account implements Serializable {
 	}
 
 	public String getFavouriteCategoryId() {
-		return favouriteCategoryId;
+		return this.favouriteCategoryId;
 	}
 
 	public void setFavouriteCategoryId(String favouriteCategoryId) {
@@ -136,7 +136,7 @@ public class Account implements Serializable {
 	}
 
 	public String getLanguagePreference() {
-		return languagePreference;
+		return this.languagePreference;
 	}
 
 	public void setLanguagePreference(String languagePreference) {
@@ -144,7 +144,7 @@ public class Account implements Serializable {
 	}
 
 	public boolean isListOption() {
-		return listOption;
+		return this.listOption;
 	}
 
 	public void setListOption(boolean listOption) {
@@ -152,7 +152,7 @@ public class Account implements Serializable {
 	}
 
 	public boolean isBannerOption() {
-		return bannerOption;
+		return this.bannerOption;
 	}
 
 	public void setBannerOption(boolean bannerOption) {
@@ -160,7 +160,7 @@ public class Account implements Serializable {
 	}
 
 	public String getBannerName() {
-		return bannerName;
+		return this.bannerName;
 	}
 
 	public void setBannerName(String bannerName) {
@@ -169,12 +169,12 @@ public class Account implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Account [username=" + username + ", password=" + password + ", email=" + email
-				+ ", firstName=" + firstName + ", lastName=" + lastName + ", status=" + status
-				+ ", address1=" + address1 + ", address2=" + address2 + ", city=" + city
-				+ ", state=" + state + ", zip=" + zip + ", country=" + country + ", phone=" + phone
-				+ ", favouriteCategoryId=" + favouriteCategoryId + ", languagePreference="
-				+ languagePreference + ", listOption=" + listOption + ", bannerOption="
-				+ bannerOption + ", bannerName=" + bannerName + "]";
+		return "Account [username=" + this.username + ", password=" + this.password + ", email=" + this.email
+				+ ", firstName=" + this.firstName + ", lastName=" + this.lastName + ", status=" + this.status
+				+ ", address1=" + this.address1 + ", address2=" + this.address2 + ", city=" + this.city
+				+ ", state=" + this.state + ", zip=" + this.zip + ", country=" + this.country + ", phone=" + this.phone
+				+ ", favouriteCategoryId=" + this.favouriteCategoryId + ", languagePreference="
+				+ this.languagePreference + ", listOption=" + this.listOption + ", bannerOption="
+				+ this.bannerOption + ", bannerName=" + this.bannerName + "]";
 	}
 }

@@ -29,7 +29,7 @@ import java.util.Map;
  * @since 0.2
  */
 public class PrincipalTag extends SecureTag {
-    static final Logger log = Logger.getLogger("PrincipalTag");
+    private final Logger log = Logger.getLogger("PrincipalTag");
 
     /**
      * The type of principal to be retrieved, or null if the default principal should be used.
@@ -54,20 +54,20 @@ public class PrincipalTag extends SecureTag {
             // Get the principal to print out
             Object principal;
 
-            if (getType(params) == null) {
+            if (this.getType(params) == null) {
                 principal = getSubject().getPrincipal();
             } else {
-                principal = getPrincipalFromClassName(params);
+                principal = this.getPrincipalFromClassName(params);
             }
 
             // Get the string value of the principal
             if (principal != null) {
-                String property = getProperty(params);
+                String property = this.getProperty(params);
 
                 if (property == null) {
                     result = principal.toString();
                 } else {
-                    result = getPrincipalProperty(principal, property);
+                    result = this.getPrincipalProperty(principal, property);
                 }
             }
         }
@@ -77,21 +77,21 @@ public class PrincipalTag extends SecureTag {
             try {
                 env.getOut().write(result);
             } catch (IOException ex) {
-                throw new TemplateException("Error writing ["+result+"] to Freemarker.", ex, env);
+                throw new TemplateException("Error writing [" + result + "] to Freemarker.", ex, env);
             }
         }
     }
 
     @SuppressWarnings("unchecked")
     Object getPrincipalFromClassName(Map params) {
-        String type = getType(params);
+        String type = this.getType(params);
 
         try {
             Class cls = Class.forName(type);
-            
+
             return getSubject().getPrincipals().oneByType(cls);
         } catch (ClassNotFoundException ex) {
-            log.error("Unable to find class for name ["+type+"]", ex);
+            log.error("Unable to find class for name [" + type + "]", ex);
         }
 
         return null;
@@ -111,9 +111,9 @@ public class PrincipalTag extends SecureTag {
             }
 
             // property not found, throw
-            throw new TemplateModelException("Property ["+property+"] not found in principal of type ["+principal.getClass().getName()+"]");
+            throw new TemplateModelException("Property [" + property + "] not found in principal of type [" + principal.getClass().getName() + "]");
         } catch (Exception ex) {
-            throw new TemplateModelException("Error reading property ["+property+"] from principal of type ["+principal.getClass().getName()+"]", ex);
+            throw new TemplateModelException("Error reading property [" + property + "] from principal of type [" + principal.getClass().getName() + "]", ex);
         }
     }
 }

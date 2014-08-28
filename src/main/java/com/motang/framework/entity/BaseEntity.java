@@ -14,34 +14,29 @@ public class BaseEntity  implements IBaseEntity {
 
 
 	private static final long serialVersionUID = 1L;
-	
 
-	
 	/**
 	 * 表的别名,用于处理复杂的where 条件拼接
 	 */
-	private String frameTableAlias=null;
-	
+	private String frameTableAlias = null;
+
 	public static long isSerialVersionUID() {
 		return serialVersionUID;
 	}
-	
+
 	public void setSerialVersionUID(long l) {
 		//return serialVersionUID;
 	}
 	public String getFrameTableAlias() {
-		return frameTableAlias;
+		return this.frameTableAlias;
 	}
-	
+
 	public String isFrameTableAlias() {
-		return frameTableAlias;
+		return this.frameTableAlias;
 	}
 
 	public void setFrameTableAlias(String frameTableAlias) {
 		this.frameTableAlias = frameTableAlias;
 	}
 
-	
-
-	
 }

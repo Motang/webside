@@ -3,7 +3,7 @@
 	
 	<display-name>Website</display-name>
 
-	<!-- Spring context -->
+	<!-- Spring context configuration -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:config/spring-config.xml</param-value>
@@ -12,6 +12,7 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
+    <!-- shiro configuration -->
 	<filter>
 		<filter-name>shiroFilter</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -25,6 +26,7 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
+    <!-- encode filter -->
 	<filter>
 		<filter-name>charsetFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -37,7 +39,18 @@
 		<filter-name>charsetFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+
+	<!-- 浏览器不支持put,delete等method,由该filter将/blog?_method=delete转换为标准的http delete方法 -->
+	<filter>
+		<filter-name>httpMethodFilter</filter-name>
+		<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>httpMethodFilter</filter-name>
+		<servlet-name>spring-mvc</servlet-name>
+	</filter-mapping>
 	
+	<!-- Durid configuration -->
     <filter>
         <filter-name>DruidWebStatFilter</filter-name>
         <filter-class>com.alibaba.druid.support.http.WebStatFilter</filter-class>
@@ -51,17 +64,6 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-	<!-- 浏览器不支持put,delete等method,由该filter将/blog?_method=delete转换为标准的http delete方法 -->
-	<filter>
-		<filter-name>httpMethodFilter</filter-name>
-		<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
-	</filter>
-
-	<filter-mapping>
-		<filter-name>httpMethodFilter</filter-name>
-		<servlet-name>spring-mvc</servlet-name>
-	</filter-mapping>
-
 	<servlet>
 		<servlet-name>DruidStatView</servlet-name>
 		<servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
@@ -71,6 +73,7 @@
 		<url-pattern>/druid/*</url-pattern>
 	</servlet-mapping>
 
+    <!-- hessian configuration, implemented by SpringMVC-->
 	<servlet>
 		<servlet-name>spring-hessian</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -85,6 +88,7 @@
 		<url-pattern>/hessian/*</url-pattern>
 	</servlet-mapping>
 	
+	<!-- springMVC configuration-->
 	<servlet>
 		<servlet-name>spring-mvc</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>

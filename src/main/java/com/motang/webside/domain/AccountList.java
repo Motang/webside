@@ -9,7 +9,7 @@ public class AccountList {
 	private List<Account> account;
 
 	public List<Account> getAccount() {
-		return account;
+		return this.account;
 	}
 
 	public void setAccount(List<Account> account) {

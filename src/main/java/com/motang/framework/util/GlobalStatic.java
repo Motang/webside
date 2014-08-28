@@ -14,7 +14,7 @@ public interface GlobalStatic {
      * 错误key
      */
     String ERROR = "error";
-    
+
     /**
      * 当前登录的用户
      */

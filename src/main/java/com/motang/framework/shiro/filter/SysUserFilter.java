@@ -114,7 +114,7 @@ public class SysUserFilter extends AccessControlFilter {
 //            url = getUserUnknownErrorUrl();
 //        }
 
-        WebUtils.issueRedirect(request, response, getUserBlockedUrl());
+        WebUtils.issueRedirect(request, response, this.getUserBlockedUrl());
     }
 
 }

@@ -1,6 +1,5 @@
 package com.motang.webside.entity;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -13,7 +12,7 @@ import com.motang.framework.entity.BaseEntity;
  * @see org.springrain.demo.entity.User
  */
 public class User  extends BaseEntity {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	//alias
@@ -45,7 +44,7 @@ public class User  extends BaseEntity {
 	//public static final String FORMAT_ENTRYDATE = DateUtils.DATETIME_FORMAT;
 	//public static final String FORMAT_STARTDATE = DateUtils.DATETIME_FORMAT;
 	//public static final String FORMAT_ENDDATE = DateUtils.DATETIME_FORMAT;
-	
+
 	//columns START
 	/**
 	 * 编号
@@ -121,15 +120,13 @@ public class User  extends BaseEntity {
 	 */
 	private java.lang.String state;
 	//columns END 数据库字段结束
-	
 
 	private String roleIds;
 	private String roleIdNames;
 	private String gradeName;
-	
-		
+
 	public java.lang.String getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(java.lang.String id) {
@@ -137,7 +134,7 @@ public class User  extends BaseEntity {
 	}
 
 	public java.lang.String getName() {
-		return name;
+		return this.name;
 	}
 
 	public void setName(java.lang.String name) {
@@ -145,7 +142,7 @@ public class User  extends BaseEntity {
 	}
 
 	public java.lang.String getWorkno() {
-		return workno;
+		return this.workno;
 	}
 
 	public void setWorkno(java.lang.String workno) {
@@ -153,7 +150,7 @@ public class User  extends BaseEntity {
 	}
 
 	public java.lang.String getAccount() {
-		return account;
+		return this.account;
 	}
 
 	public void setAccount(java.lang.String account) {
@@ -161,7 +158,7 @@ public class User  extends BaseEntity {
 	}
 
 	public java.lang.String getPassword() {
-		return password;
+		return this.password;
 	}
 
 	public void setPassword(java.lang.String password) {
@@ -169,7 +166,7 @@ public class User  extends BaseEntity {
 	}
 
 	public java.lang.String getCardno() {
-		return cardno;
+		return this.cardno;
 	}
 
 	public void setCardno(java.lang.String cardno) {
@@ -177,7 +174,7 @@ public class User  extends BaseEntity {
 	}
 
 	public java.lang.Integer getAge() {
-		return age;
+		return this.age;
 	}
 
 	public void setAge(java.lang.Integer age) {
@@ -185,7 +182,7 @@ public class User  extends BaseEntity {
 	}
 
 	public java.lang.String getSex() {
-		return sex;
+		return this.sex;
 	}
 
 	public void setSex(java.lang.String sex) {
@@ -193,7 +190,7 @@ public class User  extends BaseEntity {
 	}
 
 	public java.lang.String getPhone() {
-		return phone;
+		return this.phone;
 	}
 
 	public void setPhone(java.lang.String phone) {
@@ -201,7 +198,7 @@ public class User  extends BaseEntity {
 	}
 
 	public java.lang.String getMobile() {
-		return mobile;
+		return this.mobile;
 	}
 
 	public void setMobile(java.lang.String mobile) {
@@ -209,7 +206,7 @@ public class User  extends BaseEntity {
 	}
 
 	public java.lang.String getEmail() {
-		return email;
+		return this.email;
 	}
 
 	public void setEmail(java.lang.String email) {
@@ -217,7 +214,7 @@ public class User  extends BaseEntity {
 	}
 
 	public java.lang.String getAddress() {
-		return address;
+		return this.address;
 	}
 
 	public void setAddress(java.lang.String address) {
@@ -225,7 +222,7 @@ public class User  extends BaseEntity {
 	}
 
 	public java.lang.String getGradeId() {
-		return gradeId;
+		return this.gradeId;
 	}
 
 	public void setGradeId(java.lang.String gradeId) {
@@ -233,7 +230,7 @@ public class User  extends BaseEntity {
 	}
 
 	public java.lang.String getEduName() {
-		return eduName;
+		return this.eduName;
 	}
 
 	public void setEduName(java.lang.String eduName) {
@@ -241,7 +238,7 @@ public class User  extends BaseEntity {
 	}
 
 	public java.lang.String getFireName() {
-		return fireName;
+		return this.fireName;
 	}
 
 	public void setFireName(java.lang.String fireName) {
@@ -249,7 +246,7 @@ public class User  extends BaseEntity {
 	}
 
 	public java.lang.String getFirePhone() {
-		return firePhone;
+		return this.firePhone;
 	}
 
 	public void setFirePhone(java.lang.String firePhone) {
@@ -257,7 +254,7 @@ public class User  extends BaseEntity {
 	}
 
 	public java.lang.String getDescription() {
-		return description;
+		return this.description;
 	}
 
 	public void setDescription(java.lang.String description) {
@@ -265,7 +262,7 @@ public class User  extends BaseEntity {
 	}
 
 	public java.lang.String getState() {
-		return state;
+		return this.state;
 	}
 
 	public void setState(java.lang.String state) {
@@ -273,7 +270,7 @@ public class User  extends BaseEntity {
 	}
 
 	public String getRoleIds() {
-		return roleIds;
+		return this.roleIds;
 	}
 
 	public void setRoleIds(String roleIds) {
@@ -281,7 +278,7 @@ public class User  extends BaseEntity {
 	}
 
 	public String getRoleIdNames() {
-		return roleIdNames;
+		return this.roleIdNames;
 	}
 
 	public void setRoleIdNames(String roleIdNames) {
@@ -289,7 +286,7 @@ public class User  extends BaseEntity {
 	}
 
 	public String getGradeName() {
-		return gradeName;
+		return this.gradeName;
 	}
 
 	public void setGradeName(String gradeName) {
@@ -298,42 +295,42 @@ public class User  extends BaseEntity {
 
 	public String toString() {
 		return new StringBuffer()
-		.append("编号[").append(getId()).append("],")
-		.append("姓名[").append(getName()).append("],")
-		.append("工号[").append(getWorkno()).append("],")
-		.append("账号[").append(getAccount()).append("],")
-		.append("密码[").append(getPassword()).append("],")
-		.append("身份证[").append(getCardno()).append("],")
-		.append("年龄[").append(getAge()).append("],")
-		.append("性别[").append(getSex()).append("],")
-		.append("电话号码[").append(getPhone()).append("],")
-		.append("手机号码[").append(getMobile()).append("],")
-		.append("邮箱[").append(getEmail()).append("],")
-		.append("地址[").append(getAddress()).append("],")
-		.append("级别[").append(getGradeId()).append("],")
-		.append("学历[").append(getEduName()).append("],")
-		.append("紧急联系人[").append(getFireName()).append("],")
-		.append("紧急联系电话[").append(getFirePhone()).append("],")
-		.append("备注[").append(getDescription()).append("],")
-		.append("是否有效,是/否/离职[").append(getState()).append("],")
+		.append("编号[").append(this.getId()).append("],")
+		.append("姓名[").append(this.getName()).append("],")
+		.append("工号[").append(this.getWorkno()).append("],")
+		.append("账号[").append(this.getAccount()).append("],")
+		.append("密码[").append(this.getPassword()).append("],")
+		.append("身份证[").append(this.getCardno()).append("],")
+		.append("年龄[").append(this.getAge()).append("],")
+		.append("性别[").append(this.getSex()).append("],")
+		.append("电话号码[").append(this.getPhone()).append("],")
+		.append("手机号码[").append(this.getMobile()).append("],")
+		.append("邮箱[").append(this.getEmail()).append("],")
+		.append("地址[").append(this.getAddress()).append("],")
+		.append("级别[").append(this.getGradeId()).append("],")
+		.append("学历[").append(this.getEduName()).append("],")
+		.append("紧急联系人[").append(this.getFireName()).append("],")
+		.append("紧急联系电话[").append(this.getFirePhone()).append("],")
+		.append("备注[").append(this.getDescription()).append("],")
+		.append("是否有效,是/否/离职[").append(this.getState()).append("],")
 		.toString();
 	}
-	
+
 	public int hashCode() {
 		return new HashCodeBuilder()
-			.append(getId())
+			.append(this.getId())
 			.toHashCode();
 	}
-	
-	public boolean equals(Object obj) {
-		if(obj instanceof User == false) return false;
-		if(this == obj) return true;
-		User other = (User)obj;
-		return new EqualsBuilder()
-			.append(getId(),other.getId())
-			.isEquals();
-	}
-	
-}
 
-	
+	public boolean equals(Object obj) {
+		if (obj instanceof User) {
+			return false;
+		}
+		if (this == obj) {
+			return true;
+		}
+		User other = (User) obj;
+		return new EqualsBuilder().append(this.getId(), other.getId()).isEquals();
+	}
+
+}

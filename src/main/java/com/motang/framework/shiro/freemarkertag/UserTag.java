@@ -23,7 +23,7 @@ import java.util.Map;
  * <p>Equivalent to {@link org.apache.shiro.web.tags.UserTag}</p>
  */
 public class UserTag extends SecureTag {
-    static final Logger log = Logger.getLogger("UserTag");
+    private final Logger log = Logger.getLogger("UserTag");
 
     @Override
     public void render(Environment env, Map params, TemplateDirectiveBody body) throws IOException, TemplateException {

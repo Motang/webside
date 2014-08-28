@@ -18,7 +18,7 @@ import java.util.Map;
  * <p>Equivalent to {@link org.apache.shiro.web.tags.NotAuthenticatedTag}</p>
  */
 public class NotAuthenticatedTag extends SecureTag {
-    static final Logger log = Logger.getLogger("NotAuthenticatedTag");
+    private final Logger log = Logger.getLogger("NotAuthenticatedTag");
 
     @Override
     public void render(Environment env, Map params, TemplateDirectiveBody body) throws IOException, TemplateException {

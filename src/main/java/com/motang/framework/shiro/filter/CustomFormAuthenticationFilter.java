@@ -1,4 +1,5 @@
 /**
+ *
  * Copyright (c) 2005-2012 https://github.com/zhangkaitao
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -48,27 +49,27 @@ public class CustomFormAuthenticationFilter extends FormAuthenticationFilter {
     }
 
     public String getDefaultSuccessUrl() {
-        return defaultSuccessUrl;
+        return this.defaultSuccessUrl;
     }
 
     public String getAdminDefaultSuccessUrl() {
-        return adminDefaultSuccessUrl;
+        return this.adminDefaultSuccessUrl;
     }
-    
+
     protected void setFailureAttribute(ServletRequest request, AuthenticationException ae) {
     	request.setAttribute(getFailureKeyAttribute(), ae);
     }
-    
+
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
-    	logger.info("CustomFormAuthenticationFilter invoke isAccessAllowed...");
+    	this.logger.info("CustomFormAuthenticationFilter invoke isAccessAllowed...");
     	return super.isAccessAllowed(request, response, mappedValue);
     }
-    
-    protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception{
-    	logger.info("CustomFormAuthenticationFilter invoke onAccessDenied<<<");
+
+    protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
+    	this.logger.info("CustomFormAuthenticationFilter invoke onAccessDenied<<<");
     	return super.onAccessDenied(request, response);
     }
-    
+
     /**
      * 根据用户选择成功地址
      *
@@ -78,8 +79,8 @@ public class CustomFormAuthenticationFilter extends FormAuthenticationFilter {
     public String getSuccessUrl() {
     	Subject subject = SecurityUtils.getSubject();
         if (subject.hasRole("admin")) {
-            return getAdminDefaultSuccessUrl();
+            return this.getAdminDefaultSuccessUrl();
         }
-        return getDefaultSuccessUrl();
+        return this.getDefaultSuccessUrl();
     }
 }

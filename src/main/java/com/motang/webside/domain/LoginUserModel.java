@@ -1,8 +1,6 @@
 package com.motang.webside.domain;
 
 import java.io.Serializable;
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.util.Date;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -11,56 +9,56 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class LoginUserModel implements Serializable {
 
 	private static final long serialVersionUID = -561630575511879611L;
-	
-	@NotBlank(message="{loginUserModel.username.error.message}")
+
+	@NotBlank(message = "{loginUserModel.username.error.message}")
 	private String username;
-	@NotBlank(message="{loginUserModel.password.error.message}")
+	@NotBlank(message = "{loginUserModel.password.error.message}")
 	private String password;
-	
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createDate;
-	
-	@DateTimeFormat(pattern="yyyy-MM-dd hh:mm:ss.SSS")
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss.SSS")
 	private Date updateDate;
-	
-	@DateTimeFormat(pattern="yyyy-MM-dd hh:mm:ss")
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	private Date updateTime;
-	
-	@DateTimeFormat(pattern="hh:mm:ss")
+
+	@DateTimeFormat(pattern = "hh:mm:ss")
 	private Date time;
-	
+
 	public String getUsername() {
-		return username;
+		return this.username;
 	}
 	public void setUsername(String username) {
 		this.username = username;
 	}
 	public String getPassword() {
-		return password;
+		return 	this.password;
 	}
 	public void setPassword(String password) {
 		this.password = password;
 	}
 	public Date getCreateDate() {
-		return createDate;
+		return this.createDate;
 	}
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
 	public Date getUpdateDate() {
-		return updateDate;
+		return this.updateDate;
 	}
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
 	}
 	public Date getUpdateTime() {
-		return updateTime;
+		return this.updateTime;
 	}
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
 	public Date getTime() {
-		return time;
+		return this.time;
 	}
 	public void setTime(Date time) {
 		this.time = time;

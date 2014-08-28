@@ -16,7 +16,7 @@ public abstract class RoleTag extends SecureTag {
 
     @Override
     public void render(Environment env, Map params, TemplateDirectiveBody body) throws IOException, TemplateException {
-        boolean show = showTagBody(getName(params));
+        boolean show = this.showTagBody(this.getName(params));
         if (show) {
             renderBody(env, body);
         }

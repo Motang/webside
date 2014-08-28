@@ -18,3 +18,4 @@ cache/
 bin/
 /.classpath
 /.project
+/.checkstyle

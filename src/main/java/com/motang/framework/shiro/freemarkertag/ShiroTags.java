@@ -8,6 +8,7 @@ import freemarker.template.SimpleHash;
  * <p>Usage: cfg.setSharedVeriable("shiro", new ShiroTags());</p>
  */
 public class ShiroTags extends SimpleHash {
+
     public ShiroTags() {
         put("authenticated", new AuthenticatedTag());
         put("guest", new GuestTag());

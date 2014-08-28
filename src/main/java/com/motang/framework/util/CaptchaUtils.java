@@ -9,11 +9,8 @@ import java.io.FileOutputStream;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.shiro.web.util.WebUtils;
 
 public class CaptchaUtils {
 
@@ -22,10 +19,10 @@ public class CaptchaUtils {
 
 	private static final String FONT_NAME = "Times New Roman";//字体
 	private static final int FONT_SIZE = 24;//字体大小
-	private int width = 85;// 图片宽
-	private int height = 25;// 图片高
-	private int lineNum = 155;// 干扰线数量
-	private int strNum = 4;// 随机产生字符数量
+	private int width = 85; // 图片宽
+	private int height = 25; // 图片高
+	private int lineNum = 155; // 干扰线数量
+	private int strNum = 4; // 随机产生字符数量
 
 	private Random random = new Random();
 
@@ -36,25 +33,25 @@ public class CaptchaUtils {
 	 */
 	public BufferedImage genRandomCodeImage(StringBuffer randomCode) {
 		// BufferedImage类是具有缓冲区的Image类
-		BufferedImage image = new BufferedImage(width, height,
+		BufferedImage image = new BufferedImage(this.width, this.height,
 				BufferedImage.TYPE_INT_RGB);
 		// 获取Graphics对象,便于对图像进行各种绘制操作
 		Graphics g = image.getGraphics();
-		g.setColor(getRandColor(200, 250));
-		g.fillRect(0, 0, width, height);
-		//g.setColor(new Color()); 
-		//g.drawRect(0,0,width-1,height-1); 
-		g.setColor(getRandColor(160, 200));
+		g.setColor(this.getRandColor(200, 250));
+		g.fillRect(0, 0, this.width, this.height);
+		//g.setColor(new Color());
+		//g.drawRect(0,0,width-1,height-1)
+		g.setColor(this.getRandColor(160, 200));
 
 		// 绘制干扰线
-		for (int i = 0; i <= lineNum; i++) {
-			drowLine(g);
+		for (int i = 0; i <= this.lineNum; i++) {
+			this.drowLine(g);
 		}
 		// 绘制随机字符
 		g.setFont(new Font(FONT_NAME, Font.PLAIN, FONT_SIZE));
-		
-		for (int i = 0; i < strNum; i++) {
-			randomCode.append(drowString(g, i));
+
+		for (int i = 0; i < this.strNum; i++) {
+			randomCode.append(this.drowString(g, i));
 		}
 		g.dispose();
 		return image;
@@ -79,9 +76,9 @@ public class CaptchaUtils {
 	 * 绘制字符串
 	 */
 	private String drowString(Graphics g, int i) {
-		g.setColor(new Color(20 + random.nextInt(110), 20 + random
-				.nextInt(110), 20 + random.nextInt(110)));
-		String rand = String.valueOf(getRandomString(random.nextInt(RANDOM_STRS
+		g.setColor(new Color(20 + this.random.nextInt(110), 20 + this.random
+				.nextInt(110), 20 + this.random.nextInt(110)));
+		String rand = String.valueOf(this.getRandomString(this.random.nextInt(RANDOM_STRS
 				.length())));
 	//	g.translate(random.nextInt(3), random.nextInt(3));
 		g.drawString(rand, 20 * i + 4, 19);
@@ -92,10 +89,10 @@ public class CaptchaUtils {
 	 * 绘制干扰线
 	 */
 	private void drowLine(Graphics g) {
-		int x = random.nextInt(width);
-		int y = random.nextInt(height);
-		int x0 = random.nextInt(12);
-		int y0 = random.nextInt(12);
+		int x = this.random.nextInt(width);
+		int y = this.random.nextInt(height);
+		int x0 = this.random.nextInt(12);
+		int y0 = this.random.nextInt(12);
 		g.drawLine(x, y, x + x0, y + y0);
 	}
 
@@ -125,16 +122,16 @@ public class CaptchaUtils {
 		if (StringUtils.isNotBlank(code)) {
 			code = code.toLowerCase().toString();
 		}
-		
+
 		if (StringUtils.isNotBlank(submitCode)) {
 			submitCode = submitCode.toLowerCase().toString();
 		}
-		
+
 		if (StringUtils.isBlank(submitCode) || StringUtils.isBlank(code)
 				|| !code.equals(submitCode)) {
 			return false;
 		}
-		
+
 		return true;
 	}
 }

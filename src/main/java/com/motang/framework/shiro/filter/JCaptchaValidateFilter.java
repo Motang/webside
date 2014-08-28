@@ -27,7 +27,7 @@ import com.motang.framework.util.GlobalStatic;
  * <p>Version: 1.0
  */
 public class JCaptchaValidateFilter extends AccessControlFilter {
-	
+
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
     private boolean jcaptchaEbabled = true;
@@ -59,24 +59,25 @@ public class JCaptchaValidateFilter extends AccessControlFilter {
     }
 
     public String getJcapatchaErrorUrl() {
-        return jcapatchaErrorUrl;
+        return this.jcapatchaErrorUrl;
     }
 
     @Override
     public boolean onPreHandle(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
-        request.setAttribute("jcaptchaEbabled", jcaptchaEbabled);
+        request.setAttribute("jcaptchaEbabled", this.jcaptchaEbabled);
         return super.onPreHandle(request, response, mappedValue);
     }
 
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
     	HttpServletRequest httpServletRequest = (HttpServletRequest) request;
-    	logger.info("JCaptchaValidateFilter jcaptchaEbabled={}, method={}", jcaptchaEbabled, httpServletRequest.getMethod());
+    	String method = httpServletRequest.getMethod();
+		this.logger.info("JCaptchaValidateFilter jcaptchaEbabled={}, method={}", this.jcaptchaEbabled, method);
     	//验证码禁用 或不是表单提交 允许访问
-        if (jcaptchaEbabled == false || !"post".equals(httpServletRequest.getMethod().toLowerCase())) {
+		if (!this.jcaptchaEbabled || !"post".equals(method.toLowerCase())) {
             return true;
         }
-        
+
     	return false;
     }
 
@@ -85,23 +86,23 @@ public class JCaptchaValidateFilter extends AccessControlFilter {
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
     	HttpServletRequest httpServletRequest = (HttpServletRequest) request;
     	HttpSession session = httpServletRequest.getSession();
-        
-    	logger.info("JCaptchaValidateFilter invoke onAccessDenied<<<<>>");
-        
+
+        logger.info("JCaptchaValidateFilter invoke onAccessDenied<<<<>>");
+
 		String code = (String) session.getAttribute(GlobalStatic.DEFAULT_CAPTCHA_PARAM);
 		String submitCode = WebUtils.getCleanParam(request, jcaptchaParam);
-		
+
         if (!CaptchaUtils.validateResponse(code, submitCode)) {
-        	redirectToLogin(request, response);
+        	this.redirectToLogin(request, response);
         	return false;
         }
-        
+
         return true;
     }
 
 
     protected void redirectToLogin(ServletRequest request, ServletResponse response) throws IOException {
-        WebUtils.issueRedirect(request, response, getJcapatchaErrorUrl());
+        WebUtils.issueRedirect(request, response, this.getJcapatchaErrorUrl());
     }
 
 }

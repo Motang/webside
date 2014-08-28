@@ -1,14 +1,14 @@
 webside
 ====
 
-Simple website with SpringMVC + Mybatis + Shiro + Druid + Ehcache
+A simple web site with SpringMVC + Mybatis + Shiro + Druid + Ehcache frameworks, it is a J2EE project named 'website', provide HTTP and Hessian interface to clients.
 
 ## Preparation
 
 1. Above JDK1.6 install
 2. Above Maven 3.0.5, Private repository with Nexus is more better in Company
 3. Eclipse Java EE IDE with Git, 'Kepler' version is more better
-4. MySQL install
+4. MySQL install (No mandatory requirement, maybe replace with H2 or HSQLDB)
 
 ## User Guide
 
@@ -24,16 +24,32 @@ Simple website with SpringMVC + Mybatis + Shiro + Druid + Ehcache
 
   http://localhost:8080/webside/index
 
+## For Test
+1. Unit Test, enter the following command
+
+  mvn test
+
+2. Integration Test, enter the following command
+
+  mvn integration-test
 
 ## Introduction
-Here introduces some very important configuration files to integrate SpringMVC、MyBatis、Shiro、Ehcache(such as web.xml, Spring configuration, SpringMVC configuration)
+  Here introduces some very important configuration files to integrate SpringMVC、MyBatis、Shiro、Ehcache(such as web.xml, Spring configuration, SpringMVC configuration)
 
 ### Guide to web.xml
+src/main/webapp/WEB-INF/web.xml contains:
+  Spring context configuration,
+  Shiro configuration,
+  Charset encode filter,
+  Durid configuration,
+  Hessian configuration,
+  SpringMVC configuration
 
-### Guide to Spring configuration files: spring-config.xml
- spring-dao.xml
- spring-common.xml
- spring-shiro.xml
+### Guide to Spring configuration files: 
+  spring-config.xml,
+  spring-dao.xml,
+  spring-common.xml,
+  spring-shiro.xml
 
-### Guide to Spring MVC configuration file: spring-mvc.xml
- spring-mvc.xml
+### Guide to Spring MVC configuration file: 
+  spring-mvc.xml

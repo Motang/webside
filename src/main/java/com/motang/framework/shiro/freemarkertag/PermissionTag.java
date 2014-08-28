@@ -14,10 +14,10 @@ public abstract class PermissionTag extends SecureTag {
     String getName(Map params) {
         return getParam(params, "name");
     }
-    
+
     @Override
     protected void verifyParameters(Map params) throws TemplateModelException {
-        String permission = getName(params);
+        String permission = this.getName(params);
 
         if (permission == null || permission.length() == 0) {
             throw new TemplateModelException("The 'name' tag attribute must be set.");
@@ -26,9 +26,9 @@ public abstract class PermissionTag extends SecureTag {
 
     @Override
     public void render(Environment env, Map params, TemplateDirectiveBody body) throws IOException, TemplateException {
-        String p = getName(params);
+        String p = this.getName(params);
 
-        boolean show = showTagBody(p);
+        boolean show = this.showTagBody(p);
         if (show) {
             renderBody(env, body);
         }
